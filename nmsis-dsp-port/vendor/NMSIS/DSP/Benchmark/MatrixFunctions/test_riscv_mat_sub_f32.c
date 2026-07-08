@@ -6,6 +6,25 @@
 
 BENCH_DECLARE_VAR();
 
+static uint32_t zircon_result_hash_combine(uint32_t hash, const void *data, uint32_t length)
+{
+    const uint8_t *bytes = (const uint8_t *)data;
+
+    for (uint32_t i = 0; i < length; i++) {
+        hash ^= bytes[i];
+        hash *= 16777619u;
+    }
+
+    return hash;
+}
+
+static void zircon_result_zero_f32(float32_t *data, uint32_t length)
+{
+    for (uint32_t i = 0; i < length; i++) {
+        data[i] = 0.0f;
+    }
+}
+
 void matSub_riscv_mat_sub_f32(void)
 {
     riscv_matrix_instance_f32 f32_A;
@@ -20,9 +39,18 @@ void matSub_riscv_mat_sub_f32(void)
     generate_rand_f32(mat_sub_f32_arrayA, M * N);
     generate_rand_f32(mat_sub_f32_arrayB, M * N);
 
-    BENCH_START(riscv_mat_sub_f32);
+    
+    zircon_result_zero_f32(mat_sub_f32_output, (uint32_t)(sizeof(mat_sub_f32_output) / sizeof(mat_sub_f32_output[0])));
+BENCH_START(riscv_mat_sub_f32);
     riscv_status result = riscv_mat_sub_f32(&f32_A, &f32_B, &f32_des);
     BENCH_END(riscv_mat_sub_f32);
 
-    TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);
+    
+    uint32_t __zr_hash = 2166136261u;
+    __zr_hash = zircon_result_hash_combine(__zr_hash, mat_sub_f32_output, (uint32_t)sizeof(mat_sub_f32_output));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, mat_sub_f32_arrayA, (uint32_t)sizeof(mat_sub_f32_arrayA));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, mat_sub_f32_arrayB, (uint32_t)sizeof(mat_sub_f32_arrayB));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
+    printf("@@RESULT@@ case=matSub_riscv_mat_sub_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
+TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);
 }

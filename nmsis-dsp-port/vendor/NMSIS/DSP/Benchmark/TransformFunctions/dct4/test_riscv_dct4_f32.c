@@ -8,6 +8,19 @@
 
 BENCH_DECLARE_VAR();
 
+static uint32_t zircon_result_hash_combine(uint32_t hash, const void *data, uint32_t length)
+{
+    const uint8_t *bytes = (const uint8_t *)data;
+
+    for (uint32_t i = 0; i < length; i++) {
+        hash ^= bytes[i];
+        hash *= 16777619u;
+    }
+
+    return hash;
+}
+
+
 #if !defined(RISCV_MATH_VECTOR)
 void dct4_riscv_dct4_f32(void)
 {
@@ -22,6 +35,12 @@ void dct4_riscv_dct4_f32(void)
     riscv_dct4_f32(&SSS, f32_state, dct4_testinput_f32_50hz_200Hz);
     BENCH_END(riscv_dct4_f32);
 
+
+    uint32_t __zr_hash = 2166136261u;
+    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_state, (uint32_t)sizeof(f32_state));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, dct4_testinput_f32_50hz_200Hz, (uint32_t)sizeof(dct4_testinput_f32_50hz_200Hz));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
+    printf("@@RESULT@@ case=dct4_riscv_dct4_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 //    TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);
 
 }

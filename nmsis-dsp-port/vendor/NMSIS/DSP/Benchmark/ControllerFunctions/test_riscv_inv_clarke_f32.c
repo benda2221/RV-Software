@@ -6,6 +6,25 @@
 
 BENCH_DECLARE_VAR();
 
+static uint32_t zircon_result_hash_combine(uint32_t hash, const void *data, uint32_t length)
+{
+    const uint8_t *bytes = (const uint8_t *)data;
+
+    for (uint32_t i = 0; i < length; i++) {
+        hash ^= bytes[i];
+        hash *= 16777619u;
+    }
+
+    return hash;
+}
+
+static void zircon_result_zero_f32(float32_t *data, uint32_t length)
+{
+    for (uint32_t i = 0; i < length; i++) {
+        data[i] = 0.0f;
+    }
+}
+
 void inv_clarke_riscv_inv_clarke_f32(void)
 {
     float32_t Ia_f32[ARRAY_SIZE_F32];
@@ -16,11 +35,21 @@ void inv_clarke_riscv_inv_clarke_f32(void)
 
     volatile int i = 0;
 
-    BENCH_START(riscv_inv_clarke_f32);
+    
+    zircon_result_zero_f32(Ia_f32, (uint32_t)(sizeof(Ia_f32) / sizeof(Ia_f32[0])));
+    zircon_result_zero_f32(Ib_f32, (uint32_t)(sizeof(Ib_f32) / sizeof(Ib_f32[0])));
+BENCH_START(riscv_inv_clarke_f32);
     for (i = 0; i < ARRAY_SIZE_F32; i++) {
         riscv_inv_clarke_f32(pIalpha_f32[i], pIbeta_f32[i], &Ia_f32[i], &Ib_f32[i]);
     }
     BENCH_END(riscv_inv_clarke_f32);
 
-    return;
+    
+    uint32_t __zr_hash = 2166136261u;
+    __zr_hash = zircon_result_hash_combine(__zr_hash, Ia_f32, (uint32_t)sizeof(Ia_f32));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, Ib_f32, (uint32_t)sizeof(Ib_f32));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, pIalpha_f32, (uint32_t)sizeof(pIalpha_f32));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, pIbeta_f32, (uint32_t)sizeof(pIbeta_f32));
+    printf("@@RESULT@@ case=inv_clarke_riscv_inv_clarke_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
+return;
 }
