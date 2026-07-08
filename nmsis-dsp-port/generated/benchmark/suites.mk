@@ -1,0 +1,1 @@
+BENCHMARK_SUITES := BasicMathFunctions ComplexMathFunctions ControllerFunctions FastMathFunctions InterpolationFunctions StatisticsFunctions SupportFunctions

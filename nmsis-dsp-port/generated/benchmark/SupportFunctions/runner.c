@@ -1,0 +1,56 @@
+#include <stdio.h>
+extern void barycenter_riscv_barycenter_f32(void);
+extern void copy_riscv_copy_f32(void);
+extern void copy_riscv_copy_q15(void);
+extern void copy_riscv_copy_q31(void);
+extern void copy_riscv_copy_q7(void);
+extern void fill_riscv_fill_f32(void);
+extern void fill_riscv_fill_q15(void);
+extern void fill_riscv_fill_q31(void);
+extern void fill_riscv_fill_q7(void);
+extern void q15ToQ31_riscv_q15_to_q31(void);
+extern void q15ToQ7_riscv_q15_to_q7(void);
+extern void q31ToQ15_riscv_q31_to_q15(void);
+extern void q31ToQ7_riscv_q31_to_q7(void);
+extern void q7ToQ15_riscv_q7_to_q15(void);
+extern void q7ToQ31_riscv_q7_to_q31(void);
+extern void weightedSum_riscv_weighted_average_f32(void);
+
+int main(void)
+{
+    printf("Start benchmark/SupportFunctions\n");
+    printf("RUN barycenter_riscv_barycenter_f32\n");
+    barycenter_riscv_barycenter_f32();
+    printf("RUN copy_riscv_copy_f32\n");
+    copy_riscv_copy_f32();
+    printf("RUN copy_riscv_copy_q15\n");
+    copy_riscv_copy_q15();
+    printf("RUN copy_riscv_copy_q31\n");
+    copy_riscv_copy_q31();
+    printf("RUN copy_riscv_copy_q7\n");
+    copy_riscv_copy_q7();
+    printf("RUN fill_riscv_fill_f32\n");
+    fill_riscv_fill_f32();
+    printf("RUN fill_riscv_fill_q15\n");
+    fill_riscv_fill_q15();
+    printf("RUN fill_riscv_fill_q31\n");
+    fill_riscv_fill_q31();
+    printf("RUN fill_riscv_fill_q7\n");
+    fill_riscv_fill_q7();
+    printf("RUN q15ToQ31_riscv_q15_to_q31\n");
+    q15ToQ31_riscv_q15_to_q31();
+    printf("RUN q15ToQ7_riscv_q15_to_q7\n");
+    q15ToQ7_riscv_q15_to_q7();
+    printf("RUN q31ToQ15_riscv_q31_to_q15\n");
+    q31ToQ15_riscv_q31_to_q15();
+    printf("RUN q31ToQ7_riscv_q31_to_q7\n");
+    q31ToQ7_riscv_q31_to_q7();
+    printf("RUN q7ToQ15_riscv_q7_to_q15\n");
+    q7ToQ15_riscv_q7_to_q15();
+    printf("RUN q7ToQ31_riscv_q7_to_q31\n");
+    q7ToQ31_riscv_q7_to_q31();
+    printf("RUN weightedSum_riscv_weighted_average_f32\n");
+    weightedSum_riscv_weighted_average_f32();
+    printf("PASS benchmark/SupportFunctions count=%d\n", 16);
+    return 0;
+}
