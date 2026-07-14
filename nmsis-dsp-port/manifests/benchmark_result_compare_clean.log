@@ -1,0 +1,4 @@
+$ make -C /home/zhangfulin/RISCV-VLIW/Zircon-VLIW/RV-Software/nmsis-dsp-port clean
+make: Entering directory '/home/zhangfulin/RISCV-VLIW/Zircon-VLIW/RV-Software/nmsis-dsp-port'
+rm -rf /home/zhangfulin/RISCV-VLIW/Zircon-VLIW/RV-Software/nmsis-dsp-port/build
+make: Leaving directory '/home/zhangfulin/RISCV-VLIW/Zircon-VLIW/RV-Software/nmsis-dsp-port'

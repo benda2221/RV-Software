@@ -5,7 +5,6 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_divide_q15.c \
   vendor/NMSIS/DSP/Source/BasicMathFunctions/riscv_abs_q15.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_common_tables.c \
-  vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_cos_q15.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_const_structs.c \
   port/src/compat_runtime.c \
 

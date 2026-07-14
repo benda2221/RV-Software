@@ -1,6 +1,8 @@
 #include <stdio.h>
 extern void svm_riscv_svm_linear_predict_f32(void);
 extern void svm_riscv_svm_polynomial_predict_f32(void);
+extern void svm_riscv_svm_rbf_predict_f32(void);
+extern void svm_riscv_svm_sigmoid_predict_f32(void);
 
 int main(void)
 {
@@ -9,6 +11,10 @@ int main(void)
     svm_riscv_svm_linear_predict_f32();
     printf("RUN svm_riscv_svm_polynomial_predict_f32\n");
     svm_riscv_svm_polynomial_predict_f32();
-    printf("PASS benchmark/SVMFunctions count=%d\n", 2);
+    printf("RUN svm_riscv_svm_rbf_predict_f32\n");
+    svm_riscv_svm_rbf_predict_f32();
+    printf("RUN svm_riscv_svm_sigmoid_predict_f32\n");
+    svm_riscv_svm_sigmoid_predict_f32();
+    printf("PASS benchmark/SVMFunctions count=%d\n", 4);
     return 0;
 }

@@ -4,9 +4,11 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_add_f32.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_add_q15.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_add_q31.c \
+  vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_cholesky_f32.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_cmplx_mult_f32.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_cmplx_mult_q15.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_cmplx_mult_q31.c \
+  vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_inverse_f32.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_ldlt_f32.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_mult_f32.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_mult_fast_q15.c \
@@ -19,6 +21,7 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_scale_q15.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_scale_q31.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_solve_lower_triangular_f32.c \
+  vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_solve_upper_triangular_f32.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_sub_f32.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_sub_q15.c \
   vendor/NMSIS/DSP/Benchmark/MatrixFunctions/test_riscv_mat_sub_q31.c \
@@ -36,11 +39,14 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_init_q15.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_add_q31.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_init_q31.c \
+  vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_cholesky_f32.c \
+  vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_mult_f32.c \
+  vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_trans_f32.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_cmplx_mult_f32.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_cmplx_mult_q15.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_cmplx_mult_q31.c \
+  vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_inverse_f32.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_ldlt_f32.c \
-  vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_mult_f32.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_mult_fast_q15.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_mult_fast_q31.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_mult_opt_q31.c \
@@ -52,10 +58,10 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_scale_q15.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_scale_q31.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_solve_lower_triangular_f32.c \
+  vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_solve_upper_triangular_f32.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_sub_f32.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_sub_q15.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_sub_q31.c \
-  vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_trans_f32.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_trans_q15.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_trans_q31.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_trans_q7.c \

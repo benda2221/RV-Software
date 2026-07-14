@@ -3,6 +3,20 @@ extern void braycurtis_distance_riscv_braycurtis_distance_f32(void);
 extern void canberra_distance_riscv_canberra_distance_f32(void);
 extern void chebyshev_distance_riscv_chebyshev_distance_f32(void);
 extern void cityblock_distance_riscv_cityblock_distance_f32(void);
+extern void correlation_distance_riscv_correlation_distance_f32(void);
+extern void cosine_distance_riscv_cosine_distance_f32(void);
+extern void dice_distance_riscv_dice_distance(void);
+extern void euclidean_distance_riscv_euclidean_distance_f32(void);
+extern void hamming_distance_riscv_hamming_distance(void);
+extern void jaccard_distance_riscv_jaccard_distance(void);
+extern void jensenshannon_distance_riscv_jensenshannon_distance_f32(void);
+extern void kulsinski_distance_riscv_kulsinski_distance(void);
+extern void minkowski_distance_riscv_minkowski_distance_f32(void);
+extern void rogerstanimoto_distance_riscv_rogerstanimoto_distance(void);
+extern void russellrao_distance_riscv_russellrao_distance(void);
+extern void sokalmichener_distance_riscv_sokalmichener_distance(void);
+extern void sokalsneath_distance_riscv_sokalsneath_distance(void);
+extern void yule_distance_riscv_yule_distance(void);
 
 int main(void)
 {
@@ -15,6 +29,34 @@ int main(void)
     chebyshev_distance_riscv_chebyshev_distance_f32();
     printf("RUN cityblock_distance_riscv_cityblock_distance_f32\n");
     cityblock_distance_riscv_cityblock_distance_f32();
-    printf("PASS benchmark/DistanceFunctions count=%d\n", 4);
+    printf("RUN correlation_distance_riscv_correlation_distance_f32\n");
+    correlation_distance_riscv_correlation_distance_f32();
+    printf("RUN cosine_distance_riscv_cosine_distance_f32\n");
+    cosine_distance_riscv_cosine_distance_f32();
+    printf("RUN dice_distance_riscv_dice_distance\n");
+    dice_distance_riscv_dice_distance();
+    printf("RUN euclidean_distance_riscv_euclidean_distance_f32\n");
+    euclidean_distance_riscv_euclidean_distance_f32();
+    printf("RUN hamming_distance_riscv_hamming_distance\n");
+    hamming_distance_riscv_hamming_distance();
+    printf("RUN jaccard_distance_riscv_jaccard_distance\n");
+    jaccard_distance_riscv_jaccard_distance();
+    printf("RUN jensenshannon_distance_riscv_jensenshannon_distance_f32\n");
+    jensenshannon_distance_riscv_jensenshannon_distance_f32();
+    printf("RUN kulsinski_distance_riscv_kulsinski_distance\n");
+    kulsinski_distance_riscv_kulsinski_distance();
+    printf("RUN minkowski_distance_riscv_minkowski_distance_f32\n");
+    minkowski_distance_riscv_minkowski_distance_f32();
+    printf("RUN rogerstanimoto_distance_riscv_rogerstanimoto_distance\n");
+    rogerstanimoto_distance_riscv_rogerstanimoto_distance();
+    printf("RUN russellrao_distance_riscv_russellrao_distance\n");
+    russellrao_distance_riscv_russellrao_distance();
+    printf("RUN sokalmichener_distance_riscv_sokalmichener_distance\n");
+    sokalmichener_distance_riscv_sokalmichener_distance();
+    printf("RUN sokalsneath_distance_riscv_sokalsneath_distance\n");
+    sokalsneath_distance_riscv_sokalsneath_distance();
+    printf("RUN yule_distance_riscv_yule_distance\n");
+    yule_distance_riscv_yule_distance();
+    printf("PASS benchmark/DistanceFunctions count=%d\n", 18);
     return 0;
 }

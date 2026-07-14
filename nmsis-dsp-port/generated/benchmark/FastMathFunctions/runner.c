@@ -1,22 +1,34 @@
 #include <stdio.h>
+extern void atan2_riscv_atan2_f32(void);
 extern void atan2_riscv_atan2_q15(void);
 extern void atan2_riscv_atan2_q31(void);
+extern void cos_riscv_cos_f32(void);
 extern void cos_riscv_cos_q15(void);
 extern void cos_riscv_cos_q31(void);
 extern void divide_riscv_divide_q15(void);
 extern void divide_riscv_divide_q31(void);
+extern void sin_riscv_sin_f32(void);
+extern void sin_riscv_sin_q15(void);
+extern void sin_riscv_sin_q31(void);
+extern void sqrt_riscv_sqrt_f32(void);
 extern void sqrt_riscv_sqrt_q15(void);
 extern void sqrt_riscv_sqrt_q31(void);
+extern void vexp_riscv_vexp_f32(void);
+extern void vlog_riscv_vlog_f32(void);
 extern void vlog_riscv_vlog_q15(void);
 extern void vlog_riscv_vlog_q31(void);
 
 int main(void)
 {
     printf("Start benchmark/FastMathFunctions\n");
+    printf("RUN atan2_riscv_atan2_f32\n");
+    atan2_riscv_atan2_f32();
     printf("RUN atan2_riscv_atan2_q15\n");
     atan2_riscv_atan2_q15();
     printf("RUN atan2_riscv_atan2_q31\n");
     atan2_riscv_atan2_q31();
+    printf("RUN cos_riscv_cos_f32\n");
+    cos_riscv_cos_f32();
     printf("RUN cos_riscv_cos_q15\n");
     cos_riscv_cos_q15();
     printf("RUN cos_riscv_cos_q31\n");
@@ -25,14 +37,26 @@ int main(void)
     divide_riscv_divide_q15();
     printf("RUN divide_riscv_divide_q31\n");
     divide_riscv_divide_q31();
+    printf("RUN sin_riscv_sin_f32\n");
+    sin_riscv_sin_f32();
+    printf("RUN sin_riscv_sin_q15\n");
+    sin_riscv_sin_q15();
+    printf("RUN sin_riscv_sin_q31\n");
+    sin_riscv_sin_q31();
+    printf("RUN sqrt_riscv_sqrt_f32\n");
+    sqrt_riscv_sqrt_f32();
     printf("RUN sqrt_riscv_sqrt_q15\n");
     sqrt_riscv_sqrt_q15();
     printf("RUN sqrt_riscv_sqrt_q31\n");
     sqrt_riscv_sqrt_q31();
+    printf("RUN vexp_riscv_vexp_f32\n");
+    vexp_riscv_vexp_f32();
+    printf("RUN vlog_riscv_vlog_f32\n");
+    vlog_riscv_vlog_f32();
     printf("RUN vlog_riscv_vlog_q15\n");
     vlog_riscv_vlog_q15();
     printf("RUN vlog_riscv_vlog_q31\n");
     vlog_riscv_vlog_q31();
-    printf("PASS benchmark/FastMathFunctions count=%d\n", 10);
+    printf("PASS benchmark/FastMathFunctions count=%d\n", 18);
     return 0;
 }

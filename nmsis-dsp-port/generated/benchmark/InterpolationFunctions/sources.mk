@@ -5,6 +5,7 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/InterpolationFunctions/test_riscv_bilinear_interp_q15.c \
   vendor/NMSIS/DSP/Benchmark/InterpolationFunctions/test_riscv_bilinear_interp_q31.c \
   vendor/NMSIS/DSP/Benchmark/InterpolationFunctions/test_riscv_bilinear_interp_q7.c \
+  vendor/NMSIS/DSP/Benchmark/InterpolationFunctions/test_riscv_linear_interp_f32.c \
   vendor/NMSIS/DSP/Benchmark/InterpolationFunctions/test_riscv_linear_interp_q15.c \
   vendor/NMSIS/DSP/Benchmark/InterpolationFunctions/test_riscv_linear_interp_q31.c \
   vendor/NMSIS/DSP/Benchmark/InterpolationFunctions/test_riscv_linear_interp_q7.c \
@@ -13,6 +14,7 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/InterpolationFunctions/riscv_bilinear_interp_q15.c \
   vendor/NMSIS/DSP/Source/InterpolationFunctions/riscv_bilinear_interp_q31.c \
   vendor/NMSIS/DSP/Source/InterpolationFunctions/riscv_bilinear_interp_q7.c \
+  vendor/NMSIS/DSP/Source/InterpolationFunctions/riscv_linear_interp_f32.c \
   vendor/NMSIS/DSP/Source/InterpolationFunctions/riscv_linear_interp_q15.c \
   vendor/NMSIS/DSP/Source/InterpolationFunctions/riscv_linear_interp_q31.c \
   vendor/NMSIS/DSP/Source/InterpolationFunctions/riscv_linear_interp_q7.c \

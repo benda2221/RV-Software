@@ -9,6 +9,7 @@ DSP = ROOT / "vendor" / "NMSIS" / "DSP"
 GENERATED = ROOT / "generated"
 MANIFESTS = ROOT / "manifests"
 F32_DIFFTEST_MISMATCH_CASES = MANIFESTS / "f32_difftest_mismatch_cases.csv"
+F32_CANDIDATE_RUN_SUMMARY = MANIFESTS / "f32_candidate_run_summary.csv"
 
 BASIC_FIXED_SUFFIXES = ("_q7", "_q15", "_q31", "_u8", "_u16", "_u32")
 BASIC_ALLOWED_OPS = (
@@ -17,12 +18,19 @@ BASIC_ALLOWED_OPS = (
 )
 DEFAULT_BENCHMARK_SUITES = (
     "BasicMathFunctions",
+    "BayesFunctions",
     "ComplexMathFunctions",
     "ControllerFunctions",
+    "DistanceFunctions",
     "FastMathFunctions",
+    "FilteringFunctions",
     "InterpolationFunctions",
+    "MatrixFunctions",
+    "QuaternionMathFunctions",
+    "SVMFunctions",
     "StatisticsFunctions",
     "SupportFunctions",
+    "TransformFunctions",
 )
 BENCHMARK_FLOAT32_ALLOWED = {
     "vendor/NMSIS/DSP/Benchmark/BasicMathFunctions/test_riscv_abs_f32.c",
@@ -91,16 +99,73 @@ BENCHMARK_FLOAT32_ALLOWED = {
     "vendor/NMSIS/DSP/Benchmark/TransformFunctions/dct4/test_riscv_dct4_f32.c",
     "vendor/NMSIS/DSP/Benchmark/TransformFunctions/rfft/test_riscv_rfft_f32.c",
 }
+BENCHMARK_FLOAT_HELPER_ALLOWED = {
+    "vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_inv_park_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_park_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_sin_cos_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/DistanceFunctions/test_riscv_dice_distance.c",
+    "vendor/NMSIS/DSP/Benchmark/DistanceFunctions/test_riscv_hamming_distance.c",
+    "vendor/NMSIS/DSP/Benchmark/DistanceFunctions/test_riscv_jaccard_distance.c",
+    "vendor/NMSIS/DSP/Benchmark/DistanceFunctions/test_riscv_kulsinski_distance.c",
+    "vendor/NMSIS/DSP/Benchmark/DistanceFunctions/test_riscv_rogerstanimoto_distance.c",
+    "vendor/NMSIS/DSP/Benchmark/DistanceFunctions/test_riscv_russellrao_distance.c",
+    "vendor/NMSIS/DSP/Benchmark/DistanceFunctions/test_riscv_sokalmichener_distance.c",
+    "vendor/NMSIS/DSP/Benchmark/DistanceFunctions/test_riscv_sokalsneath_distance.c",
+    "vendor/NMSIS/DSP/Benchmark/DistanceFunctions/test_riscv_yule_distance.c",
+    "vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_sin_q15.c",
+    "vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_sin_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_df1_32x64_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_df1_fast_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_df1_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_decimate_q15.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_decimate_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_fast_q15.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_fast_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_lms_norm_q15.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_lms_norm_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_lms_q15.c",
+    "vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_lms_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_float_to_q15.c",
+    "vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_float_to_q31.c",
+    "vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_float_to_q7.c",
+    "vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q15_to_float.c",
+    "vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q31_to_float.c",
+    "vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q7_to_float.c",
+}
+BOOLEAN_DISTANCE_SYMBOLS = (
+    "riscv_boolean_distance_TT_TF_FT",
+    "riscv_boolean_distance_TF_FT",
+    "riscv_boolean_distance_TT_FF_TF_FT",
+    "riscv_boolean_distance_TT",
+)
+BENCHMARK_BACKEND_ERROR_CASES = {
+    "vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_q15.c",
+}
 MATH_RE = re.compile(r"\b(?:sqrtf?|sinf?|cosf?|logf?|expf?|powf?|atan2f?|floorf?|ceilf?)\s*\(")
 FUNC_RE = re.compile(r"^\s*void\s+([A-Za-z0-9_]+)\s*\(\s*void\s*\)", re.MULTILINE)
+MAIN_RE = re.compile(r"\bmain\s*\(")
 RISCV_SYMBOL_RE = re.compile(r"\briscv_[A-Za-z0-9_]+\b")
+LEGACY_SYMBOL_RE = re.compile(r"\b(?:riscv|ref|generate|validate)_[A-Za-z0-9_]+\b")
 RISCV_FUNCTION_DEF_RE = re.compile(
     r"^[ \t]*(?:[A-Za-z_][A-Za-z0-9_]*[ \t\*]+)+"
     r"(riscv_[A-Za-z0-9_]+)\s*\([^;{}]*\)\s*\{",
     re.MULTILINE,
 )
+LEGACY_FUNCTION_DEF_RE = re.compile(
+    r"^[ \t]*(?:[A-Za-z_][A-Za-z0-9_]*[ \t\*]+)+"
+    r"((?:riscv|ref|generate|validate)_[A-Za-z0-9_]+)\s*\([^;{}]*\)\s*\{",
+    re.MULTILINE,
+)
 FLOAT_RE = re.compile(r"\b(?:float|double|float16_t|float32_t|float64_t|f16|f32|f64)\b|_(?:f16|f32|f64)\b")
 HEX_RE = re.compile(r"^\s*0x[0-9a-fA-F]+")
+COMMENT_RE = re.compile(r"/\*.*?\*/|//.*?$", re.DOTALL | re.MULTILINE)
+INCLUDE_C_RE = re.compile(r"^\s*#\s*include\s+[<\"]([^>\"]+\.c)[>\"]", re.MULTILINE)
+CASE_ID_RE = re.compile(r"[^A-Za-z0-9_]+")
+
+
+def code_text(path: pathlib.Path) -> str:
+    return COMMENT_RE.sub("", path.read_text(errors="ignore"))
 
 
 def rel(path: pathlib.Path) -> str:
@@ -143,10 +208,16 @@ def source_symbol_index():
     for src in sorted((DSP / "Source").rglob("*.c")):
         if source_blockers_for(src):
             continue
-        text = src.read_text(errors="ignore")
+        text = code_text(src)
         for symbol in RISCV_FUNCTION_DEF_RE.findall(text):
             index.setdefault(symbol, src)
         index.setdefault(src.stem, src)
+        if src.name == "riscv_boolean_distance.c":
+            for symbol in BOOLEAN_DISTANCE_SYMBOLS:
+                index.setdefault(symbol, src)
+        if src.name == "riscv_cfft_init_f32.c":
+            for size in (16, 32, 64, 128, 256, 512, 1024, 2048, 4096):
+                index.setdefault(f"riscv_cfft_init_{size}_f32", src)
     return index
 
 
@@ -157,7 +228,10 @@ def dependency_sources(paths):
     queue = []
 
     for path in paths:
-        queue.extend(sorted(set(RISCV_SYMBOL_RE.findall(path.read_text(errors="ignore")))))
+        text = code_text(path)
+        queue.extend(sorted(set(RISCV_SYMBOL_RE.findall(text))))
+        if "generate_posi_def_symme_f32" in text:
+            queue.extend(["riscv_mat_add_f32", "riscv_mat_mult_f32", "riscv_mat_trans_f32"])
 
     while queue:
         symbol = queue.pop(0)
@@ -166,7 +240,7 @@ def dependency_sources(paths):
             continue
         seen.add(src)
         selected.append(src)
-        queue.extend(sorted(set(RISCV_SYMBOL_RE.findall(src.read_text(errors="ignore")))))
+        queue.extend(sorted(set(RISCV_SYMBOL_RE.findall(code_text(src)))))
 
     for src in (
         DSP / "Source" / "CommonTables" / "riscv_common_tables.c",
@@ -177,12 +251,174 @@ def dependency_sources(paths):
     return selected
 
 
+def sanitize_case_id(path: pathlib.Path, suite: str) -> str:
+    local = path.relative_to(DSP / "Test" / suite).with_suffix("")
+    return CASE_ID_RE.sub("_", "__".join(local.parts)).strip("_")
+
+
+def included_c_sources(path: pathlib.Path, seen=None):
+    if seen is None:
+        seen = set()
+    found = []
+    for include in INCLUDE_C_RE.findall(path.read_text(errors="ignore")):
+        candidate = (path.parent / include).resolve()
+        if not candidate.exists() or candidate in seen:
+            continue
+        try:
+            candidate.relative_to(ROOT)
+        except ValueError:
+            continue
+        seen.add(candidate)
+        found.append(candidate)
+        found.extend(included_c_sources(candidate, seen))
+    return found
+
+
+def legacy_source_symbol_index():
+    index = {}
+    for src in sorted((ROOT / "port" / "src").glob("*.c")):
+        text = code_text(src)
+        for symbol in LEGACY_FUNCTION_DEF_RE.findall(text):
+            index.setdefault(symbol, src)
+    for src in sorted((DSP / "Source").rglob("*.c")):
+        if src.name.endswith("Functions.c") or src.name.endswith("FunctionsF16.c"):
+            continue
+        if "rvv" in src.name.lower() or "RVV" in str(src):
+            continue
+        text = code_text(src)
+        for symbol in LEGACY_FUNCTION_DEF_RE.findall(text):
+            index.setdefault(symbol, src)
+        if src.name.startswith("riscv_"):
+            index.setdefault(src.stem, src)
+        if src.name == "riscv_boolean_distance.c":
+            for symbol in BOOLEAN_DISTANCE_SYMBOLS:
+                index.setdefault(symbol, src)
+    for src in sorted((DSP / "Test").rglob("*.c")):
+        text = code_text(src)
+        if MAIN_RE.search(text):
+            continue
+        for symbol in LEGACY_FUNCTION_DEF_RE.findall(text):
+            index.setdefault(symbol, src)
+        if src.name.startswith(("riscv_", "ref_")):
+            index.setdefault(src.stem, src)
+    for symbol in (
+        "riscvRecipTableQ31", "riscvRecipTableQ15",
+        "twiddleCoef_4096", "twiddleCoef_4096_q31", "twiddleCoef_4096_q15",
+    ):
+        index.setdefault(symbol, DSP / "Source" / "CommonTables" / "riscv_common_tables.c")
+    return index
+
+
+def legacy_dependency_sources(paths):
+    index = legacy_source_symbol_index()
+    selected = []
+    selected_set = set()
+    excluded = set(paths)
+    scan_seen = set()
+    queue = []
+
+    def scan(path):
+        if path in scan_seen:
+            return
+        scan_seen.add(path)
+        text = code_text(path)
+        queue.extend(sorted(set(LEGACY_SYMBOL_RE.findall(text))))
+        for included in included_c_sources(path):
+            excluded.add(included)
+            scan(included)
+
+    for path in paths:
+        scan(path)
+
+    while queue:
+        symbol = queue.pop(0)
+        src = index.get(symbol)
+        if not src or src in selected_set or src in excluded:
+            continue
+        selected_set.add(src)
+        selected.append(src)
+        scan(src)
+
+    for src in (
+        DSP / "Source" / "CommonTables" / "riscv_common_tables.c",
+        DSP / "Source" / "CommonTables" / "riscv_const_structs.c",
+        ROOT / "port" / "src" / "ref_matrix_f32_subset.c",
+        ROOT / "port" / "src" / "compat_runtime.c",
+    ):
+        if src.exists() and src not in selected_set and src not in excluded:
+            selected_set.add(src)
+            selected.append(src)
+    return selected
+
+
+def write_legacy_no_call_runner(path, suite, case_id):
+    with path.open("w") as f:
+        f.write("#include <stdio.h>\n")
+        f.write("\nint main(void)\n{\n")
+        f.write(f'    printf("PASS legacy/{suite}/{case_id} compile-link only\\n");\n')
+        f.write("    return 0;\n}\n")
+
+
+def write_legacy_case(cases_dir, suite, test_path):
+    case_id = sanitize_case_id(test_path, suite)
+    case_dir = cases_dir / case_id
+    case_dir.mkdir(parents=True, exist_ok=True)
+    sources = []
+    if not MAIN_RE.search(code_text(test_path)):
+        runner = case_dir / "runner.c"
+        write_legacy_no_call_runner(runner, suite, case_id)
+        sources.append(runner)
+    sources.append(test_path)
+    sources.extend(legacy_dependency_sources([test_path]))
+
+    deduped = []
+    seen = set()
+    for src in sources:
+        if src in seen:
+            continue
+        seen.add(src)
+        deduped.append(src)
+    test_name = "nmsis-dsp-legacy-" + suite.lower() + "-" + case_id.lower()
+    write_sources_mk(case_dir / "sources.mk", test_name, deduped)
+    return case_id
+
+
+def legacy_all_cases():
+    rows = []
+    case_entries = []
+    for path in sorted((DSP / "Test").rglob("*.c")):
+        suite = path.relative_to(DSP / "Test").parts[0]
+        outdir = GENERATED / "legacy" / suite
+        cases_dir = outdir / "cases"
+        cases_dir.mkdir(parents=True, exist_ok=True)
+        case_id = write_legacy_case(cases_dir, suite, path)
+        case_entries.append((suite, case_id))
+        rows.append({
+            "system": "legacy",
+            "suite": suite,
+            "path": rel(path),
+            "status": "enabled",
+            "reason": "generated_legacy_case",
+        })
+
+    cases_mk = GENERATED / "legacy" / "cases.mk"
+    cases_mk.parent.mkdir(parents=True, exist_ok=True)
+    with cases_mk.open("w") as f:
+        f.write("LEGACY_CASES := \\\n")
+        for suite, case_id in case_entries:
+            f.write(f"  {suite}:{case_id} \\\n")
+        f.write("\n")
+    return rows
+
+
 def benchmark_test_enabled(path: pathlib.Path):
     stem = path.stem.replace("test_riscv_", "")
     suite = path.relative_to(DSP / "Benchmark").parts[0]
     rpath = rel(path)
     blockers = blockers_for(path)
-    if rpath in BENCHMARK_FLOAT32_ALLOWED and blockers == ["floating_point"]:
+    if (rpath in BENCHMARK_FLOAT32_ALLOWED or stem.endswith("_f32")) and blockers == ["floating_point"]:
+        return True, ""
+    if rpath in BENCHMARK_FLOAT_HELPER_ALLOWED and blockers == ["floating_point"]:
         return True, ""
     if blockers:
         return False, ";".join(blockers)
@@ -246,6 +482,37 @@ def benchmark_difftest_case_entries(suite):
     return entries
 
 
+def benchmark_backend_error_case_entries(suite):
+    entries = []
+    for rpath in sorted(BENCHMARK_BACKEND_ERROR_CASES):
+        test_path = ROOT / rpath
+        if not test_path.exists():
+            continue
+        if test_path.relative_to(DSP / "Benchmark").parts[0] != suite:
+            continue
+        found = FUNC_RE.findall(test_path.read_text(errors="ignore"))
+        if found:
+            entries.append((test_path, found[0]))
+    return entries
+
+
+def benchmark_failed_f32_case_entries(suite):
+    if not F32_CANDIDATE_RUN_SUMMARY.exists():
+        return []
+    entries = []
+    with F32_CANDIDATE_RUN_SUMMARY.open(newline="") as f:
+        for row in csv.DictReader(f):
+            if row["system"] != "benchmark" or row["suite"] != suite:
+                continue
+            if row["result"] == "PASS" or not row["function"].endswith("_f32"):
+                continue
+            test_path = ROOT / row["path"]
+            fn = row["function"]
+            if test_path.exists() and fn:
+                entries.append((test_path, fn))
+    return entries
+
+
 def benchmark_suite(suite):
     base = DSP / "Benchmark" / suite
     outdir = GENERATED / "benchmark" / suite
@@ -284,6 +551,10 @@ def benchmark_suite(suite):
     case_entries = {fn: (test_path, fn) for test_path, fn in entries}
     for test_path, fn in benchmark_difftest_case_entries(suite):
         case_entries.setdefault(fn, (test_path, fn))
+    for test_path, fn in benchmark_failed_f32_case_entries(suite):
+        case_entries.setdefault(fn, (test_path, fn))
+    for test_path, fn in benchmark_backend_error_case_entries(suite):
+        case_entries.setdefault(fn, (test_path, fn))
     for test_path, fn in case_entries.values():
         write_benchmark_case(cases_dir, suite, test_name, test_path, fn)
     return manifest_rows
@@ -297,7 +568,7 @@ def benchmark_suites():
             continue
         suite_rows = benchmark_suite(base.name)
         rows.extend(suite_rows)
-        if base.name in DEFAULT_BENCHMARK_SUITES and any(row["status"] == "enabled" for row in suite_rows):
+        if base.name in DEFAULT_BENCHMARK_SUITES:
             enabled_suites.append(base.name)
 
     suites_mk = GENERATED / "benchmark" / "suites.mk"
@@ -334,16 +605,13 @@ def legacy_basicmath():
         for src in sources:
             f.write(f"  {rel(src)} \\\n")
         f.write("\n")
-    rows = []
-    for src in test_sources:
-        rows.append({
-            "system": "legacy",
-            "suite": suite,
-            "path": rel(src),
-            "status": "enabled",
-            "reason": "",
-        })
-    return rows
+    return [{
+        "system": "legacy",
+        "suite": suite,
+        "path": rel(ROOT / "port" / "src" / "legacy_basicmath_fixed_runner.c"),
+        "status": "enabled",
+        "reason": "zircon_fixed_runner",
+    }]
 
 
 
@@ -575,14 +843,21 @@ def write_manifest(rows):
         for (system, status), count in sorted(summary.items()):
             f.write(f"- {system} {status}: {count}\n")
         f.write("\nGenerated executable inputs:\n")
-        f.write("\n- benchmark/* integer/fixed-point C runners generated from NMSIS Benchmark test_*.c\n")
+        f.write("\n- benchmark/* integer/fixed-point, f32, and validated non-f16/f64 helper C runners generated from NMSIS Benchmark test_*.c\n")
+        f.write("- benchmark/ControllerFunctions/pid_riscv_pid_q15 single-case runner for reproducing the current Dandelion VLIW backend error; manifest status remains skipped\n")
         f.write("- legacy/BasicMathFunctions Zircon fixed-point runner, 30 q7/q15/q31 checks\n")
+        f.write("- legacy/*/cases/* single-source entries for every upstream NMSIS Test/*.c file; sources with upstream main use that main, no-main sources use a compile-link smoke runner\n")
         f.write("- testing_smoke/BasicMaths Q7/Q15/Q31 pattern-driven calls without numeric assertions\n")
         f.write("\nDefault `make test-all` benchmark suites:\n")
         for suite in DEFAULT_BENCHMARK_SUITES:
             f.write(f"\n- {suite}")
-        f.write("\n\nFilteringFunctions, MatrixFunctions, and TransformFunctions are generated but intentionally excluded from the default list until long-runtime and difftest issues are resolved.\n")
+        f.write("\n\nAll generated Benchmark suite directories are included in the default list. All Benchmark cases whose source file is f32 are enabled; no benchmark f32 case remains skipped.\n")
+        f.write("Additional non-f16/f64 Benchmark helper cases are enabled after single-case validation, including q15/q31 controller/filtering, boolean distance, and float/fixed conversion paths.\n")
+        f.write("Distance boolean helper dependency closure includes riscv_boolean_distance.c and generated helper symbols, and dependency scanning ignores comments.\n")
+        f.write("Benchmark runs default to USE_SIMULATOR_ONLY_MODE=1 from nmsis-dsp-port so f32 cases avoid the current F-instruction difftest path. Override USE_SIMULATOR_ONLY_MODE=0 when validating that path.\n")
+        f.write("Remaining Benchmark skips are f16/f64-oriented deferred areas plus the known pid_q15 Dandelion VLIW backend error.\n")
         f.write("The original legacy BasicMath main is tracked but replaced because f32 trips the current F-instruction difftest path and unsigned logical tests trip an lbu difftest mismatch in that runner.\n")
+        f.write("All upstream legacy C sources are generated as per-case executable entries. Sources that already define main use their upstream entry point; no-main reference/helper sources use a compile-link smoke runner. Some generated legacy cases are expected to expose reference compile errors or runtime numeric/SNR mismatches until their helpers and tolerances are ported.\n")
         f.write("Most `Testing` C++ suites are tracked but skipped until either a C++ standard library/runtime shim or a suite-specific C smoke runner is available.\n")
 
 
@@ -590,6 +865,7 @@ def main():
     rows = []
     rows.extend(benchmark_suites())
     rows.extend(legacy_basicmath())
+    rows.extend(legacy_all_cases())
     rows.extend(testing_basicmath_smoke())
     enumerate_skipped(rows)
     write_manifest(rows)

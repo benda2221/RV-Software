@@ -4,8 +4,13 @@ extern void clarke_riscv_clarke_q31(void);
 extern void inv_clarke_riscv_inv_clarke_f32(void);
 extern void inv_clarke_riscv_inv_clarke_q31(void);
 extern void inv_park_riscv_inv_park_f32(void);
+extern void inv_park_riscv_inv_park_q31(void);
 extern void park_riscv_park_f32(void);
+extern void park_riscv_park_q31(void);
 extern void pid_riscv_pid_f32(void);
+extern void pid_riscv_pid_q31(void);
+extern void sin_cos_riscv_sin_cos_f32(void);
+extern void sin_cos_riscv_sin_cos_q31(void);
 
 int main(void)
 {
@@ -20,10 +25,20 @@ int main(void)
     inv_clarke_riscv_inv_clarke_q31();
     printf("RUN inv_park_riscv_inv_park_f32\n");
     inv_park_riscv_inv_park_f32();
+    printf("RUN inv_park_riscv_inv_park_q31\n");
+    inv_park_riscv_inv_park_q31();
     printf("RUN park_riscv_park_f32\n");
     park_riscv_park_f32();
+    printf("RUN park_riscv_park_q31\n");
+    park_riscv_park_q31();
     printf("RUN pid_riscv_pid_f32\n");
     pid_riscv_pid_f32();
-    printf("PASS benchmark/ControllerFunctions count=%d\n", 7);
+    printf("RUN pid_riscv_pid_q31\n");
+    pid_riscv_pid_q31();
+    printf("RUN sin_cos_riscv_sin_cos_f32\n");
+    sin_cos_riscv_sin_cos_f32();
+    printf("RUN sin_cos_riscv_sin_cos_q31\n");
+    sin_cos_riscv_sin_cos_q31();
+    printf("PASS benchmark/ControllerFunctions count=%d\n", 12);
     return 0;
 }

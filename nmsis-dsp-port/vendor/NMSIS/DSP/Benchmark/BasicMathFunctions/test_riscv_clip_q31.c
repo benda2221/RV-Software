@@ -6,6 +6,19 @@
 
 BENCH_DECLARE_VAR();
 
+static uint32_t zircon_result_hash_combine(uint32_t hash, const void *data, uint32_t length)
+{
+    const uint8_t *bytes = (const uint8_t *)data;
+
+    for (uint32_t i = 0; i < length; i++) {
+        hash ^= bytes[i];
+        hash *= 16777619u;
+    }
+
+    return hash;
+}
+
+
 void clip_riscv_clip_q31(void)
 {
     q31_t low_q31 = LOWER_BOUND_Q31;
@@ -17,4 +30,8 @@ void clip_riscv_clip_q31(void)
     BENCH_START(riscv_clip_q31);
     riscv_clip_q31(clip_q31_input, clip_q31_output, low_q31, high_q31, ARRAY_SIZE_Q31);
     BENCH_END(riscv_clip_q31);
+
+    uint32_t __zr_hash = 2166136261u;
+    __zr_hash = zircon_result_hash_combine(__zr_hash, clip_q31_output, (uint32_t)sizeof(clip_q31_output));
+    printf("@@RESULT@@ case=clip_riscv_clip_q31 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

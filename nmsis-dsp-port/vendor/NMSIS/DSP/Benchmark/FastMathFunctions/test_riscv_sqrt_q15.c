@@ -7,6 +7,19 @@
 
 BENCH_DECLARE_VAR();
 
+static uint32_t zircon_result_hash_combine(uint32_t hash, const void *data, uint32_t length)
+{
+    const uint8_t *bytes = (const uint8_t *)data;
+
+    for (uint32_t i = 0; i < length; i++) {
+        hash ^= bytes[i];
+        hash *= 16777619u;
+    }
+
+    return hash;
+}
+
+
 void sqrt_riscv_sqrt_q15(void)
 {
     q15_t sqrt_q15_output[ARRAY_SIZE_Q15];
@@ -24,7 +37,11 @@ void sqrt_riscv_sqrt_q15(void)
     }
     BENCH_END(riscv_sqrt_q15);
 
-    TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);
+    uint32_t __zr_hash = 2166136261u;
+    __zr_hash = zircon_result_hash_combine(__zr_hash, sqrt_q15_output, (uint32_t)sizeof(sqrt_q15_output));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
+    printf("@@RESULT@@ case=sqrt_riscv_sqrt_q15 hash=0x%08x\n", (unsigned int)__zr_hash);
+TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);
 
     return;
 }

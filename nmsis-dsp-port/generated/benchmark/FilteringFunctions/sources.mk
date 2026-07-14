@@ -1,11 +1,15 @@
 TEST_NAME := nmsis-dsp-benchmark-filtering
 TEST_SRCS := \
   generated/benchmark/FilteringFunctions/runner.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_df1_32x64_q31.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_df1_f32.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_df1_fast_q15.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_df1_fast_q31.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_df1_q15.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_df1_q31.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_df2T_f32.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_biquad_cascade_stereo_df2T_f32.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_conv_f32.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_conv_fast_opt_q15.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_conv_fast_q15.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_conv_fast_q31.c \
@@ -23,6 +27,7 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_conv_q15.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_conv_q31.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_conv_q7.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_correlate_f32.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_correlate_fast_opt_q15.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_correlate_fast_q15.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_correlate_fast_q31.c \
@@ -34,7 +39,11 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_decimate_f32.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_decimate_fast_q15.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_decimate_fast_q31.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_decimate_q15.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_decimate_q31.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_f32.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_fast_q15.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_fast_q31.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_interpolate_f32.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_interpolate_q15.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_interpolate_q31.c \
@@ -44,6 +53,7 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_q15.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_q31.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_q7.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_sparse_f32.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_sparse_q15.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_sparse_q31.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_fir_sparse_q7.c \
@@ -52,15 +62,28 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_iir_lattice_q31.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_levinson_durbin_f32.c \
   vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_levinson_durbin_q31.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_lms_f32.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_lms_norm_f32.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_lms_norm_q15.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_lms_norm_q31.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_lms_q15.c \
+  vendor/NMSIS/DSP/Benchmark/FilteringFunctions/test_riscv_lms_q31.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df1_32x64_init_q31.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df1_32x64_q31.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_float_to_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df1_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df1_init_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df1_fast_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df1_init_q15.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df1_fast_q31.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df1_init_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df1_q15.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df1_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df2T_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_df2T_init_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_stereo_df2T_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_biquad_cascade_stereo_df2T_init_f32.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_conv_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_conv_fast_opt_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_conv_fast_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_conv_fast_q31.c \
@@ -78,6 +101,7 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_conv_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_conv_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_conv_q7.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_correlate_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_correlate_fast_opt_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_correlate_fast_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_correlate_fast_q31.c \
@@ -92,29 +116,34 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_decimate_init_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_decimate_fast_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_decimate_init_q31.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_decimate_q15.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_float_to_q15.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_decimate_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_init_f32.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_fast_q15.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_init_q15.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_fast_q31.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_init_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_interpolate_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_interpolate_init_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_interpolate_init_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_interpolate_q15.c \
-  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_float_to_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_interpolate_init_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_interpolate_q31.c \
-  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_float_to_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_lattice_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_lattice_init_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_lattice_init_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_lattice_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_lattice_init_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_lattice_q31.c \
-  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_init_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_q15.c \
-  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_init_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_init_q7.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_q7.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_float_to_q7.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_sparse_f32.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_sparse_init_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_sparse_init_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_sparse_q15.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_sparse_init_q31.c \
@@ -129,20 +158,26 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_iir_lattice_q31.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_levinson_durbin_f32.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_levinson_durbin_q31.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_f32.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_init_f32.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_norm_f32.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_norm_init_f32.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_norm_init_q15.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_norm_q15.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_norm_init_q31.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_norm_q31.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_init_q15.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_q15.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_init_q31.c \
+  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_lms_q31.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_copy_q15.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_fill_q15.c \
-  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_conv_f32.c \
-  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_decimate_q15.c \
-  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_decimate_q31.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_copy_f32.c \
-  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_fast_q15.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_copy_q31.c \
-  vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_fast_q31.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_copy_q7.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_divide_q15.c \
-  vendor/NMSIS/DSP/Source/BasicMathFunctions/riscv_abs_q15.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_common_tables.c \
-  vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_cos_q15.c \
+  vendor/NMSIS/DSP/Source/BasicMathFunctions/riscv_abs_q15.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_const_structs.c \
   port/src/compat_runtime.c \
 

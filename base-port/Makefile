@@ -80,10 +80,10 @@ $(IMAGE).elf: $(OBJS) $(LIBS)
 image: $(IMAGE).elf
 
 run: image
-	@make -s -C $(SIM_PATH) run IMG=$(IMAGE).bin ARGS=$(ARGS)
+	@make -s -C $(SIM_PATH) run IMG=$(IMAGE).bin ARGS=$(ARGS) USE_SIMULATOR_ONLY_MODE=$(USE_SIMULATOR_ONLY_MODE)
 
 gdb: image
-	@make -s -C $(SIM_PATH) gdb IMG=$(IMAGE).bin ARGS=$(ARGS)
+	@make -s -C $(SIM_PATH) gdb IMG=$(IMAGE).bin ARGS=$(ARGS) USE_SIMULATOR_ONLY_MODE=$(USE_SIMULATOR_ONLY_MODE)
 
 clean: 
 	rm -rf $(BUILD_DIR)

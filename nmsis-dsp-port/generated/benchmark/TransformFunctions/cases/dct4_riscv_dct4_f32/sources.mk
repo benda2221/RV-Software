@@ -6,21 +6,13 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_const_structs.c \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_dct4_f32.c \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_dct4_init_f32.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_cfft_f32.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_cfft_init_f32.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_rfft_f32.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_cfft_radix4_f32.c \
   vendor/NMSIS/DSP/Source/ComplexMathFunctions/riscv_cmplx_mult_cmplx_f32.c \
   vendor/NMSIS/DSP/Source/BasicMathFunctions/riscv_mult_f32.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_rfft_init_f32.c \
+  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_rfft_f32.c \
   vendor/NMSIS/DSP/Source/BasicMathFunctions/riscv_scale_f32.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_bitreversal2.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_cfft_q31.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_cfft_radix8_f32.c \
+  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_rfft_init_f32.c \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_bitreversal.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_rfft_fast_f32.c \
+  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_cfft_radix4_f32.c \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_cfft_radix4_init_f32.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_rfft_fast_init_f32.c \
-  vendor/NMSIS/DSP/Source/TransformFunctions/riscv_cfft_radix4_q31.c \
   port/src/compat_runtime.c \
 

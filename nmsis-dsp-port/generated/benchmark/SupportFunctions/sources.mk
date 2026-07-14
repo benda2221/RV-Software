@@ -10,12 +10,20 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_fill_q15.c \
   vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_fill_q31.c \
   vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_fill_q7.c \
+  vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_float_to_q15.c \
+  vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_float_to_q31.c \
+  vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_float_to_q7.c \
+  vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_merge_sort_f32.c \
+  vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q15_to_float.c \
   vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q15_to_q31.c \
   vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q15_to_q7.c \
+  vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q31_to_float.c \
   vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q31_to_q15.c \
   vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q31_to_q7.c \
+  vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q7_to_float.c \
   vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q7_to_q15.c \
   vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_q7_to_q31.c \
+  vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_sort_f32.c \
   vendor/NMSIS/DSP/Benchmark/SupportFunctions/test_riscv_weighted_average_f32.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_barycenter_f32.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_copy_f32.c \
@@ -26,13 +34,29 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_fill_q15.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_fill_q31.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_fill_q7.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_float_to_q15.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_float_to_q31.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_float_to_q7.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_merge_sort_f32.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_merge_sort_init_f32.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q15_to_float.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q15_to_q31.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q15_to_q7.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q31_to_float.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q31_to_q15.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q31_to_q7.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q7_to_float.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q7_to_q15.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q7_to_q31.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_sort_f32.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_sort_init_f32.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_weighted_average_f32.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_bitonic_sort_f32.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_bubble_sort_f32.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_heap_sort_f32.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_insertion_sort_f32.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_quick_sort_f32.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_selection_sort_f32.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_common_tables.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_const_structs.c \
   port/src/compat_runtime.c \

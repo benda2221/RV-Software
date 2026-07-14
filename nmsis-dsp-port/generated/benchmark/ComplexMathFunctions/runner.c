@@ -5,6 +5,7 @@ extern void cmplx_conj_riscv_cmplx_conj_q31(void);
 extern void cmplx_dot_prod_riscv_cmplx_dot_prod_f32(void);
 extern void cmplx_dot_prod_riscv_cmplx_dot_prod_q15(void);
 extern void cmplx_dot_prod_riscv_cmplx_dot_prod_q31(void);
+extern void cmplx_mag_riscv_cmplx_mag_f32(void);
 extern void cmplx_mag_riscv_cmplx_mag_fast_q15(void);
 extern void cmplx_mag_riscv_cmplx_mag_q15(void);
 extern void cmplx_mag_riscv_cmplx_mag_q31(void);
@@ -33,6 +34,8 @@ int main(void)
     cmplx_dot_prod_riscv_cmplx_dot_prod_q15();
     printf("RUN cmplx_dot_prod_riscv_cmplx_dot_prod_q31\n");
     cmplx_dot_prod_riscv_cmplx_dot_prod_q31();
+    printf("RUN cmplx_mag_riscv_cmplx_mag_f32\n");
+    cmplx_mag_riscv_cmplx_mag_f32();
     printf("RUN cmplx_mag_riscv_cmplx_mag_fast_q15\n");
     cmplx_mag_riscv_cmplx_mag_fast_q15();
     printf("RUN cmplx_mag_riscv_cmplx_mag_q15\n");
@@ -57,6 +60,6 @@ int main(void)
     cmplx_mult_real_riscv_cmplx_mult_real_q15();
     printf("RUN cmplx_mult_real_riscv_cmplx_mult_real_q31\n");
     cmplx_mult_real_riscv_cmplx_mult_real_q31();
-    printf("PASS benchmark/ComplexMathFunctions count=%d\n", 18);
+    printf("PASS benchmark/ComplexMathFunctions count=%d\n", 19);
     return 0;
 }

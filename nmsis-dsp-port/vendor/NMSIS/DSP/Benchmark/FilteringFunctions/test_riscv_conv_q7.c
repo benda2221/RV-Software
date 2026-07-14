@@ -6,6 +6,19 @@
 
 BENCH_DECLARE_VAR();
 
+static uint32_t zircon_result_hash_combine(uint32_t hash, const void *data, uint32_t length)
+{
+    const uint8_t *bytes = (const uint8_t *)data;
+
+    for (uint32_t i = 0; i < length; i++) {
+        hash ^= bytes[i];
+        hash *= 16777619u;
+    }
+
+    return hash;
+}
+
+
 void conv_riscv_conv_q7(void)
 {
     q7_t conv_q7_output[2 * max(ARRAYA_SIZE_Q7, ARRAYB_SIZE_Q7)];
@@ -17,5 +30,8 @@ void conv_riscv_conv_q7(void)
     riscv_conv_q7(test_conv_input_q7_A, ARRAYA_SIZE_Q7, test_conv_input_q7_B, ARRAYB_SIZE_Q7, conv_q7_output);
     BENCH_END(riscv_conv_q7);
 
-    return;
+    uint32_t __zr_hash = 2166136261u;
+    __zr_hash = zircon_result_hash_combine(__zr_hash, conv_q7_output, (uint32_t)sizeof(conv_q7_output));
+    printf("@@RESULT@@ case=conv_riscv_conv_q7 hash=0x%08x\n", (unsigned int)__zr_hash);
+return;
 }

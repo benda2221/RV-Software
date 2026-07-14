@@ -6,6 +6,19 @@
 
 BENCH_DECLARE_VAR();
 
+static uint32_t zircon_result_hash_combine(uint32_t hash, const void *data, uint32_t length)
+{
+    const uint8_t *bytes = (const uint8_t *)data;
+
+    for (uint32_t i = 0; i < length; i++) {
+        hash ^= bytes[i];
+        hash *= 16777619u;
+    }
+
+    return hash;
+}
+
+
 void fir_riscv_fir_q31(void)
 {
     q31_t firStateq31[TEST_LENGTH_SAMPLES_Q31 + NUM_TAPS_Q31 - 1];
@@ -22,5 +35,8 @@ void fir_riscv_fir_q31(void)
     riscv_fir_q31(&S, testInput_q31_50Hz_200Hz, fir_q31_output, TEST_LENGTH_SAMPLES_Q31);
     BENCH_END(riscv_fir_q31);
 
-    return;
+    uint32_t __zr_hash = 2166136261u;
+    __zr_hash = zircon_result_hash_combine(__zr_hash, fir_q31_output, (uint32_t)sizeof(fir_q31_output));
+    printf("@@RESULT@@ case=fir_riscv_fir_q31 hash=0x%08x\n", (unsigned int)__zr_hash);
+return;
 }

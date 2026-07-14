@@ -2,9 +2,11 @@
 extern void matAdd_riscv_mat_add_f32(void);
 extern void matAdd_riscv_mat_add_q15(void);
 extern void matAdd_riscv_mat_add_q31(void);
+extern void matCholesky_riscv_mat_cholesky_f32(void);
 extern void matCmplxMult_riscv_mat_cmplx_mult_f32(void);
 extern void matCmplxMult_riscv_mat_cmplx_mult_q15(void);
 extern void matCmplxMult_riscv_mat_cmplx_mult_q31(void);
+extern void matInverse_riscv_mat_inverse_f32(void);
 extern void matLdlt_riscv_mat_ldlt_f32(void);
 extern void matMult_riscv_mat_mult_f32(void);
 extern void matMultFast_riscv_mat_mult_fast_q15(void);
@@ -17,6 +19,7 @@ extern void matScale_riscv_mat_scale_f32(void);
 extern void matScale_riscv_mat_scale_q15(void);
 extern void matScale_riscv_mat_scale_q31(void);
 extern void matSolveLower_riscv_mat_solve_lower_triangular_f32(void);
+extern void matSolveUpper_riscv_mat_solve_upper_triangular_f32(void);
 extern void matSub_riscv_mat_sub_f32(void);
 extern void matSub_riscv_mat_sub_q15(void);
 extern void matSub_riscv_mat_sub_q31(void);
@@ -38,12 +41,16 @@ int main(void)
     matAdd_riscv_mat_add_q15();
     printf("RUN matAdd_riscv_mat_add_q31\n");
     matAdd_riscv_mat_add_q31();
+    printf("RUN matCholesky_riscv_mat_cholesky_f32\n");
+    matCholesky_riscv_mat_cholesky_f32();
     printf("RUN matCmplxMult_riscv_mat_cmplx_mult_f32\n");
     matCmplxMult_riscv_mat_cmplx_mult_f32();
     printf("RUN matCmplxMult_riscv_mat_cmplx_mult_q15\n");
     matCmplxMult_riscv_mat_cmplx_mult_q15();
     printf("RUN matCmplxMult_riscv_mat_cmplx_mult_q31\n");
     matCmplxMult_riscv_mat_cmplx_mult_q31();
+    printf("RUN matInverse_riscv_mat_inverse_f32\n");
+    matInverse_riscv_mat_inverse_f32();
     printf("RUN matLdlt_riscv_mat_ldlt_f32\n");
     matLdlt_riscv_mat_ldlt_f32();
     printf("RUN matMult_riscv_mat_mult_f32\n");
@@ -68,6 +75,8 @@ int main(void)
     matScale_riscv_mat_scale_q31();
     printf("RUN matSolveLower_riscv_mat_solve_lower_triangular_f32\n");
     matSolveLower_riscv_mat_solve_lower_triangular_f32();
+    printf("RUN matSolveUpper_riscv_mat_solve_upper_triangular_f32\n");
+    matSolveUpper_riscv_mat_solve_upper_triangular_f32();
     printf("RUN matSub_riscv_mat_sub_f32\n");
     matSub_riscv_mat_sub_f32();
     printf("RUN matSub_riscv_mat_sub_q15\n");
@@ -90,6 +99,6 @@ int main(void)
     matVecMult_riscv_mat_vec_mult_q31();
     printf("RUN matVecMult_riscv_mat_vec_mult_q7\n");
     matVecMult_riscv_mat_vec_mult_q7();
-    printf("PASS benchmark/MatrixFunctions count=%d\n", 29);
+    printf("PASS benchmark/MatrixFunctions count=%d\n", 32);
     return 0;
 }

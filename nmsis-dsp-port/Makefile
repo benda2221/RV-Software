@@ -2,8 +2,10 @@ BASE_PORT = $(abspath ../base-port)
 SIM_PATH = $(abspath ../../)
 SUITE ?= BasicMathFunctions
 TEST_SYSTEM ?=
+USE_SIMULATOR_ONLY_MODE ?= 1
 
 -include generated/benchmark/suites.mk
+-include generated/legacy/cases.mk
 
 ifeq ($(TEST_SYSTEM),benchmark)
 ifneq ($(TEST_CASE),)
@@ -14,7 +16,11 @@ endif
 NAMES = $(TEST_NAME)
 SRCS = $(TEST_SRCS)
 else ifeq ($(TEST_SYSTEM),legacy)
+ifneq ($(TEST_CASE),)
+include generated/legacy/$(SUITE)/cases/$(TEST_CASE)/sources.mk
+else
 include generated/legacy/$(SUITE)/sources.mk
+endif
 NAMES = $(TEST_NAME)
 SRCS = $(TEST_SRCS)
 else ifeq ($(TEST_SYSTEM),testing-smoke)
@@ -39,7 +45,7 @@ include $(BASE_PORT)/Makefile
 CFLAGS += -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable
 CFLAGS += -Wno-implicit-const-int-float-conversion -Wno-implicit-function-declaration
 
-.PHONY: generate-tests benchmark legacy-test testing-smoke test-all run-generated-all run-benchmark run-legacy run-testing-smoke
+.PHONY: generate-tests benchmark legacy-test testing-smoke test-all run-generated-all run-benchmark run-legacy run-legacy-generated-all run-testing-smoke
 
 generate-tests:
 	python3 scripts/generate_zircon_tests.py
@@ -58,6 +64,12 @@ run-benchmark: generate-tests
 
 run-legacy: generate-tests
 	$(MAKE) TEST_SYSTEM=legacy SUITE=$(SUITE) run
+
+run-legacy-generated-all: generate-tests
+	@set -e; for entry in $(LEGACY_CASES); do \
+		suite=$${entry%%:*}; test_case=$${entry#*:}; \
+		$(MAKE) TEST_SYSTEM=legacy SUITE=$$suite TEST_CASE=$$test_case run; \
+	done
 
 run-testing-smoke: generate-tests
 	$(MAKE) TEST_SYSTEM=testing-smoke SUITE=BasicMaths run

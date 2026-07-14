@@ -67,6 +67,16 @@ static inline void generate_rand_f64(float64_t *src, int length)
         src[i] = (float64_t)(int32_t)zircon_test_rand() / 2147483648.0;
 }
 
+static inline void generate_posi_def_symme_f32(const riscv_matrix_instance_f32 *pSrc,
+                                               riscv_matrix_instance_f32 *pUnitMat,
+                                               riscv_matrix_instance_f32 *pDot,
+                                               riscv_matrix_instance_f32 *pDst)
+{
+    riscv_mat_trans_f32(pSrc, pDst);
+    riscv_mat_mult_f32(pDst, pSrc, pDot);
+    riscv_mat_add_f32(pDot, pUnitMat, pDst);
+}
+
 #define TEST_ASSERT_TRUE(condition) do { \
     if (!(condition)) printf("ASSERT %s:%d: %s\n", __FILE__, __LINE__, #condition); \
 } while (0)

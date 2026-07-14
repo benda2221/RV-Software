@@ -1,6 +1,8 @@
 TEST_NAME := nmsis-dsp-benchmark-statistics
 TEST_SRCS := \
   generated/benchmark/StatisticsFunctions/runner.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_absmax_f32.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_absmax_no_idx_f32.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_absmax_no_idx_q15.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_absmax_no_idx_q31.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_absmax_no_idx_q7.c \
@@ -15,6 +17,12 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_absmin_q15.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_absmin_q31.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_absmin_q7.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_entropy_f32.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_kullback_leibler_f32.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_logsumexp_dot_prod_f32.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_logsumexp_f32.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_max_f32.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_max_no_idx_f32.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_max_no_idx_q15.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_max_no_idx_q31.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_max_no_idx_q7.c \
@@ -25,6 +33,8 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_mean_q15.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_mean_q31.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_mean_q7.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_min_f32.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_min_no_idx_f32.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_min_no_idx_q15.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_min_no_idx_q31.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_min_no_idx_q7.c \
@@ -39,13 +49,17 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_power_q15.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_power_q31.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_power_q7.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_rms_f32.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_rms_q15.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_rms_q31.c \
+  vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_std_f32.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_std_q15.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_std_q31.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_var_f32.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_var_q15.c \
   vendor/NMSIS/DSP/Benchmark/StatisticsFunctions/test_riscv_var_q31.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_absmax_f32.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_absmax_no_idx_f32.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_absmax_no_idx_q15.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_absmax_no_idx_q31.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_absmax_no_idx_q7.c \
@@ -60,6 +74,12 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_absmin_q15.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_absmin_q31.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_absmin_q7.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_entropy_f32.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_kullback_leibler_f32.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_logsumexp_dot_prod_f32.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_logsumexp_f32.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_max_f32.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_max_no_idx_f32.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_max_no_idx_q15.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_max_no_idx_q31.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_max_no_idx_q7.c \
@@ -70,6 +90,8 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_mean_q15.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_mean_q31.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_mean_q7.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_min_f32.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_min_no_idx_f32.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_min_no_idx_q15.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_min_no_idx_q31.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_min_no_idx_q7.c \
@@ -84,13 +106,16 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_power_q15.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_power_q31.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_power_q7.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_rms_f32.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_rms_q15.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_rms_q31.c \
+  vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_std_f32.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_std_q15.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_std_q31.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_var_f32.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_var_q15.c \
   vendor/NMSIS/DSP/Source/StatisticsFunctions/riscv_var_q31.c \
+  vendor/NMSIS/DSP/Source/BasicMathFunctions/riscv_add_f32.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_sqrt_q15.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_sqrt_q31.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_common_tables.c \

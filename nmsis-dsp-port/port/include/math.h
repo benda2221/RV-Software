@@ -5,6 +5,7 @@
 #define M_PI PI
 #define NAN (__builtin_nanf(""))
 #define INFINITY (__builtin_inff())
+#define signbit(value) __builtin_signbit(value)
 
 static inline float fabsf(float value) { return __builtin_fabsf(value); }
 static inline double fabs(double value) { return __builtin_fabs(value); }
@@ -22,6 +23,8 @@ double log(double value);
 double log10(double value);
 float expf(float value);
 double exp(double value);
+float tanhf(float value);
+double tanh(double value);
 float powf(float base, float exponent);
 double pow(double base, double exponent);
 float floorf(float value);

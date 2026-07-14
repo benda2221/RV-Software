@@ -1,24 +1,39 @@
 TEST_NAME := nmsis-dsp-benchmark-fastmath
 TEST_SRCS := \
   generated/benchmark/FastMathFunctions/runner.c \
+  vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_atan2_f32.c \
   vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_atan2_q15.c \
   vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_atan2_q31.c \
+  vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_cos_f32.c \
   vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_cos_q15.c \
   vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_cos_q31.c \
   vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_divide_q15.c \
   vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_divide_q31.c \
+  vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_sin_f32.c \
+  vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_sin_q15.c \
+  vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_sin_q31.c \
+  vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_sqrt_f32.c \
   vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_sqrt_q15.c \
   vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_sqrt_q31.c \
+  vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_vexp_f32.c \
+  vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_vlog_f32.c \
   vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_vlog_q15.c \
   vendor/NMSIS/DSP/Benchmark/FastMathFunctions/test_riscv_vlog_q31.c \
+  vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_atan2_f32.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_atan2_q15.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_atan2_q31.c \
+  vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_cos_f32.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_cos_q15.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_cos_q31.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_divide_q15.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_divide_q31.c \
+  vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_sin_f32.c \
+  vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_sin_q15.c \
+  vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_sin_q31.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_sqrt_q15.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_sqrt_q31.c \
+  vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_vexp_f32.c \
+  vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_vlog_f32.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_vlog_q15.c \
   vendor/NMSIS/DSP/Source/FastMathFunctions/riscv_vlog_q31.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_common_tables.c \

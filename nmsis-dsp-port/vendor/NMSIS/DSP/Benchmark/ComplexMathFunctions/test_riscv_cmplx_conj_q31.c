@@ -6,6 +6,19 @@
 
 BENCH_DECLARE_VAR();
 
+static uint32_t zircon_result_hash_combine(uint32_t hash, const void *data, uint32_t length)
+{
+    const uint8_t *bytes = (const uint8_t *)data;
+
+    for (uint32_t i = 0; i < length; i++) {
+        hash ^= bytes[i];
+        hash *= 16777619u;
+    }
+
+    return hash;
+}
+
+
 void cmplx_conj_riscv_cmplx_conj_q31(void)
 {
 
@@ -18,5 +31,8 @@ void cmplx_conj_riscv_cmplx_conj_q31(void)
     riscv_cmplx_conj_q31(cmplx_conj_q31_input, cmplx_conj_q31_output, ARRAY_SIZE_Q31);
     BENCH_END(riscv_cmplx_conj_q31);
 
-    return;
+    uint32_t __zr_hash = 2166136261u;
+    __zr_hash = zircon_result_hash_combine(__zr_hash, cmplx_conj_q31_output, (uint32_t)sizeof(cmplx_conj_q31_output));
+    printf("@@RESULT@@ case=cmplx_conj_riscv_cmplx_conj_q31 hash=0x%08x\n", (unsigned int)__zr_hash);
+return;
 }

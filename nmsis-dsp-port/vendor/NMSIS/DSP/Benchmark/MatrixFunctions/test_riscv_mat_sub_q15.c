@@ -6,6 +6,19 @@
 
 BENCH_DECLARE_VAR();
 
+static uint32_t zircon_result_hash_combine(uint32_t hash, const void *data, uint32_t length)
+{
+    const uint8_t *bytes = (const uint8_t *)data;
+
+    for (uint32_t i = 0; i < length; i++) {
+        hash ^= bytes[i];
+        hash *= 16777619u;
+    }
+
+    return hash;
+}
+
+
 void matSub_riscv_mat_sub_q15(void)
 {
     riscv_matrix_instance_q15 q15_A;
@@ -24,6 +37,10 @@ void matSub_riscv_mat_sub_q15(void)
     riscv_status result = riscv_mat_sub_q15(&q15_A, &q15_B, &q15_des);
     BENCH_END(riscv_mat_sub_q15);
 
-    TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);
+    uint32_t __zr_hash = 2166136261u;
+    __zr_hash = zircon_result_hash_combine(__zr_hash, mat_sub_q15_output, (uint32_t)sizeof(mat_sub_q15_output));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
+    printf("@@RESULT@@ case=matSub_riscv_mat_sub_q15 hash=0x%08x\n", (unsigned int)__zr_hash);
+TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);
 
 }

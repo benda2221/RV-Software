@@ -7,6 +7,7 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/ComplexMathFunctions/test_riscv_cmplx_dot_prod_f32.c \
   vendor/NMSIS/DSP/Benchmark/ComplexMathFunctions/test_riscv_cmplx_dot_prod_q15.c \
   vendor/NMSIS/DSP/Benchmark/ComplexMathFunctions/test_riscv_cmplx_dot_prod_q31.c \
+  vendor/NMSIS/DSP/Benchmark/ComplexMathFunctions/test_riscv_cmplx_mag_f32.c \
   vendor/NMSIS/DSP/Benchmark/ComplexMathFunctions/test_riscv_cmplx_mag_fast_q15.c \
   vendor/NMSIS/DSP/Benchmark/ComplexMathFunctions/test_riscv_cmplx_mag_q15.c \
   vendor/NMSIS/DSP/Benchmark/ComplexMathFunctions/test_riscv_cmplx_mag_q31.c \
@@ -25,6 +26,7 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/ComplexMathFunctions/riscv_cmplx_dot_prod_f32.c \
   vendor/NMSIS/DSP/Source/ComplexMathFunctions/riscv_cmplx_dot_prod_q15.c \
   vendor/NMSIS/DSP/Source/ComplexMathFunctions/riscv_cmplx_dot_prod_q31.c \
+  vendor/NMSIS/DSP/Source/ComplexMathFunctions/riscv_cmplx_mag_f32.c \
   vendor/NMSIS/DSP/Source/ComplexMathFunctions/riscv_cmplx_mag_fast_q15.c \
   vendor/NMSIS/DSP/Source/ComplexMathFunctions/riscv_cmplx_mag_q15.c \
   vendor/NMSIS/DSP/Source/ComplexMathFunctions/riscv_cmplx_mag_q31.c \
