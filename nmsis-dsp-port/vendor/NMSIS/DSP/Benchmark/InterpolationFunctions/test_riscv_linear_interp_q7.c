@@ -29,6 +29,9 @@ void linear_riscv_linear_interp_q7(void)
     linear_interp_q7_output = riscv_linear_interp_q7(y_q7_input, x_q31_input, ARRAY_SIZE);
     BENCH_END(riscv_linear_interp_q7);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &linear_interp_q7_output, (uint32_t)sizeof(linear_interp_q7_output));
     printf("@@RESULT@@ case=linear_riscv_linear_interp_q7 hash=0x%08x\n", (unsigned int)__zr_hash);

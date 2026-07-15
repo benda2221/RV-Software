@@ -38,9 +38,9 @@ void weightedSum_riscv_weighted_average_f32(void)
     f32_weighted_output = riscv_weighted_average_f32(f32_weighted_sum_array, f32_weighted_array, WEIGHT_NUM);
     BENCH_END(riscv_weighted_average_f32);
 
+
+
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_weighted_sum_array, (uint32_t)sizeof(f32_weighted_sum_array));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_weighted_array, (uint32_t)sizeof(f32_weighted_array));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &f32_weighted_output, (uint32_t)sizeof(f32_weighted_output));
     printf("@@RESULT@@ case=weightedSum_riscv_weighted_average_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

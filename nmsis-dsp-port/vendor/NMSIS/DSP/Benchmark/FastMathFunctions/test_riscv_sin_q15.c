@@ -31,6 +31,10 @@ void sin_riscv_sin_q15(void)
     }
     BENCH_END(riscv_sin_q15);
 
+
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, sin_q15_output, (uint32_t)sizeof(sin_q15_output));
     printf("@@RESULT@@ case=sin_riscv_sin_q15 hash=0x%08x\n", (unsigned int)__zr_hash);

@@ -50,15 +50,12 @@ BENCH_START(riscv_park_f32);
     BENCH_END(riscv_park_f32);
 
     
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, pId_f32, (uint32_t)sizeof(pId_f32));
     __zr_hash = zircon_result_hash_combine(__zr_hash, pIq_f32, (uint32_t)sizeof(pIq_f32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, Ia_f32, (uint32_t)sizeof(Ia_f32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, Ib_f32, (uint32_t)sizeof(Ib_f32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, pIalpha_f32, (uint32_t)sizeof(pIalpha_f32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, pIbeta_f32, (uint32_t)sizeof(pIbeta_f32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, sinVal_f32, (uint32_t)sizeof(sinVal_f32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, cosVal_f32, (uint32_t)sizeof(cosVal_f32));
     printf("@@RESULT@@ case=park_riscv_park_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 return;
 }

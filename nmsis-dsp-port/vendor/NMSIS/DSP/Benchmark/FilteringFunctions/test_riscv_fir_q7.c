@@ -35,6 +35,10 @@ void fir_riscv_fir_q7(void)
     riscv_fir_q7(&S, testInput_q7_50Hz_200Hz, fir_q7_output, TEST_LENGTH_SAMPLES_Q7);
     BENCH_END(riscv_fir_q7);
 
+
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, fir_q7_output, (uint32_t)sizeof(fir_q7_output));
     printf("@@RESULT@@ case=fir_riscv_fir_q7 hash=0x%08x\n", (unsigned int)__zr_hash);

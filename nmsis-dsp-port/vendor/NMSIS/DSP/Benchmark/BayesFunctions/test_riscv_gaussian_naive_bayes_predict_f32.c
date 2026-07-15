@@ -49,13 +49,10 @@ BENCH_START(riscv_gaussian_naive_bayes_predict_f32);
     BENCH_END(riscv_gaussian_naive_bayes_predict_f32);
 
     
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, bayes_f32_output, (uint32_t)sizeof(bayes_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, pBufferB_f32, (uint32_t)sizeof(pBufferB_f32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, bayes_f32_input, (uint32_t)sizeof(bayes_f32_input));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, theta_f32, (uint32_t)sizeof(theta_f32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, sigma_f32, (uint32_t)sizeof(sigma_f32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, classPriors_f32, (uint32_t)sizeof(classPriors_f32));
     printf("@@RESULT@@ case=bayes_riscv_gaussian_naive_bayes_predict_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 return;
 }

@@ -32,6 +32,9 @@ void xor_riscv_xor_u32(void)
     riscv_xor_u32((uint32_t *)xor_in1, (uint32_t *)xor_in2, xor_u32_output, ARRAY_SIZE_U32);
     BENCH_END(riscv_xor_u32);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, xor_u32_output, (uint32_t)sizeof(xor_u32_output));
     printf("@@RESULT@@ case=xor_riscv_xor_u32 hash=0x%08x\n", (unsigned int)__zr_hash);

@@ -32,6 +32,9 @@ void offset_riscv_offset_q15(void)
     riscv_offset_q15(offset_q15_input, offset_q15, offset_q15_output, ARRAY_SIZE_Q15);
     BENCH_END(riscv_offset_q15);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, offset_q15_output, (uint32_t)sizeof(offset_q15_output));
     printf("@@RESULT@@ case=offset_riscv_offset_q15 hash=0x%08x\n", (unsigned int)__zr_hash);

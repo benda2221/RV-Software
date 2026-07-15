@@ -37,10 +37,9 @@ void logsumexpDotProd_riscv_logsumexp_dot_prod_f32(void)
     f32_output = riscv_logsumexp_dot_prod_f32(logsumexp_dotProd_f32_input1, logsumexp_dotProd_f32_input2, ARRAY_SIZE, f32_temp_array);
     BENCH_END(riscv_logsumexp_dot_prod_f32);
 
+
+
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, logsumexp_dotProd_f32_input1, (uint32_t)sizeof(logsumexp_dotProd_f32_input1));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, logsumexp_dotProd_f32_input2, (uint32_t)sizeof(logsumexp_dotProd_f32_input2));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_temp_array, (uint32_t)sizeof(f32_temp_array));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &f32_output, (uint32_t)sizeof(f32_output));
     printf("@@RESULT@@ case=logsumexpDotProd_riscv_logsumexp_dot_prod_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

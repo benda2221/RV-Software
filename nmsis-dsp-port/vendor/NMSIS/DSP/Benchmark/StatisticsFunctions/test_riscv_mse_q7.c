@@ -30,6 +30,9 @@ void mse_riscv_mse_q7(void)
     riscv_mse_q7(mse_q7_input1, mse_q7_input2, ARRAY_SIZE, &q7_output);
     BENCH_END(riscv_mse_q7);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &q7_output, (uint32_t)sizeof(q7_output));
     printf("@@RESULT@@ case=mse_riscv_mse_q7 hash=0x%08x\n", (unsigned int)__zr_hash);

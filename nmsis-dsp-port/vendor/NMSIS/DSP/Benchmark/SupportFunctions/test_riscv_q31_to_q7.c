@@ -29,6 +29,9 @@ void q31ToQ7_riscv_q31_to_q7(void)
     riscv_q31_to_q7(q31_input, q7_output, ARRAY_SIZE);
     BENCH_END(riscv_q31_to_q7);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, q7_output, (uint32_t)sizeof(q7_output));
     printf("@@RESULT@@ case=q31ToQ7_riscv_q31_to_q7 hash=0x%08x\n", (unsigned int)__zr_hash);

@@ -30,6 +30,9 @@ void min_riscv_min_q15(void)
     riscv_min_q15(min_q15_input, ARRAY_SIZE, &q15_output, &index);
     BENCH_END(riscv_min_q15);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &q15_output, (uint32_t)sizeof(q15_output));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &index, (uint32_t)sizeof(index));

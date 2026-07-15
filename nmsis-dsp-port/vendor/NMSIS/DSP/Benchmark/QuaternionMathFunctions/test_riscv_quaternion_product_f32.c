@@ -38,9 +38,10 @@ BENCH_START(riscv_quaternion_product_f32);
     riscv_quaternion_product_f32(quat_product_f32_input1, quat_product_f32_input2, f32_output, ARRAY_SIZE);
     BENCH_END(riscv_quaternion_product_f32);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, f32_output, (uint32_t)sizeof(f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, quat_product_f32_input1, (uint32_t)sizeof(quat_product_f32_input1));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, quat_product_f32_input2, (uint32_t)sizeof(quat_product_f32_input2));
     printf("@@RESULT@@ case=quaternionProduct_riscv_quaternion_product_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

@@ -31,6 +31,10 @@ void cos_riscv_cos_q15(void)
     }
     BENCH_END(riscv_cos_q15);
 
+
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, cos_q15_output, (uint32_t)sizeof(cos_q15_output));
     printf("@@RESULT@@ case=cos_riscv_cos_q15 hash=0x%08x\n", (unsigned int)__zr_hash);

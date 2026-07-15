@@ -38,6 +38,10 @@ void matMult_riscv_mat_mult_q7(void)
     riscv_status result = riscv_mat_mult_q7(&q7_A, &q7_B, &q7_des, q7_output_back);
     BENCH_END(riscv_mat_mult_q7);
 
+
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, q7_output, (uint32_t)sizeof(q7_output));
     __zr_hash = zircon_result_hash_combine(__zr_hash, q7_output_back, (uint32_t)sizeof(q7_output_back));

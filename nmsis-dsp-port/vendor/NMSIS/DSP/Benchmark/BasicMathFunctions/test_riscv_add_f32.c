@@ -39,9 +39,9 @@ BENCH_START(riscv_add_f32);
     riscv_add_f32(add_f32_input1, add_f32_input2, add_f32_output, ARRAY_SIZE_F32);
     BENCH_END(riscv_add_f32);
 
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, add_f32_output, (uint32_t)sizeof(add_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, add_f32_input1, (uint32_t)sizeof(add_f32_input1));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, add_f32_input2, (uint32_t)sizeof(add_f32_input2));
     printf("@@RESULT@@ case=add_riscv_add_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

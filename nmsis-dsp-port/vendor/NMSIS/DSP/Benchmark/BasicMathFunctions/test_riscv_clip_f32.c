@@ -39,10 +39,9 @@ BENCH_START(riscv_clip_f32);
     riscv_clip_f32(clip_f32_input, clip_f32_output, low_f32, high_f32, ARRAY_SIZE_F32);
     BENCH_END(riscv_clip_f32);
 
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, clip_f32_output, (uint32_t)sizeof(clip_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, clip_f32_input, (uint32_t)sizeof(clip_f32_input));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, &low_f32, (uint32_t)sizeof(low_f32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, &high_f32, (uint32_t)sizeof(high_f32));
     printf("@@RESULT@@ case=clip_riscv_clip_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

@@ -55,10 +55,10 @@ BENCH_START(riscv_pid_f32);
     }
     BENCH_END(riscv_pid_f32);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, pid_f32_output, (uint32_t)sizeof(pid_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, &target, (uint32_t)sizeof(target));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, &ival, (uint32_t)sizeof(ival));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, &ee, (uint32_t)sizeof(ee));
     printf("@@RESULT@@ case=pid_riscv_pid_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

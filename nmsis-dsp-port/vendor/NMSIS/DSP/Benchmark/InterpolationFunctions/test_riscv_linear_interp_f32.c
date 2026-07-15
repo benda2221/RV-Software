@@ -43,8 +43,9 @@ void linear_riscv_linear_interp_f32(void)
     linear_interp_f32_output = riscv_linear_interp_f32(&S_f32, x_f32_input);
     BENCH_END(riscv_linear_interp_f32);
 
+
+
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_y_array, (uint32_t)sizeof(f32_y_array));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &linear_interp_f32_output, (uint32_t)sizeof(linear_interp_f32_output));
     printf("@@RESULT@@ case=linear_riscv_linear_interp_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

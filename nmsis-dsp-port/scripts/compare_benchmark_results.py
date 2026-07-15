@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import csv
+import argparse
 import re
 import shlex
 import subprocess
@@ -82,8 +83,7 @@ def generated_suites():
     return match.group(1).split()
 
 
-def parse_sources(suite):
-    mk = ROOT / "generated" / "benchmark" / suite / "sources.mk"
+def parse_sources_from_mk(mk):
     sources = []
     active = False
     for line in mk.read_text().splitlines():
@@ -100,20 +100,32 @@ def parse_sources(suite):
     return sources
 
 
+def parse_sources(suite):
+    mk = ROOT / "generated" / "benchmark" / suite / "sources.mk"
+    return parse_sources_from_mk(mk)
+
+
+def parse_case_sources(suite, case):
+    mk = ROOT / "generated" / "benchmark" / suite / "cases" / case / "sources.mk"
+    return parse_sources_from_mk(mk)
+
+
 def find_function_body(text):
-    match = re.search(r"void\s+([A-Za-z_]\w*)\s*\([^)]*\)\s*\{", text)
-    if not match:
-        return None
-    start = match.end() - 1
-    depth = 0
-    for idx in range(start, len(text)):
-        ch = text[idx]
-        if ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                return match.group(1), start, idx + 1
+    for match in re.finditer(r"void\s+([A-Za-z_]\w*)\s*\([^)]*\)\s*\{", text):
+        start = match.end() - 1
+        depth = 0
+        for idx in range(start, len(text)):
+            ch = text[idx]
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    body_end = idx + 1
+                    body = text[start:body_end]
+                    if re.search(r"BENCH_END\s*\(", body):
+                        return match.group(1), start, body_end
+                    break
     return None
 
 
@@ -171,12 +183,20 @@ def collect_items(text):
 
 
 def strip_injected_result(text):
-    pattern = (
-        r"\n\s*uint32_t __zr_hash = 2166136261u;\n"
-        r"(?:\s*__zr_hash = zircon_result_hash_combine\([^\n]*\);\n)*"
-        r"\s*printf\(\"@@RESULT@@[^\n]*\);\n"
-    )
-    return re.sub(pattern, "\n", text)
+    lines = text.splitlines(keepends=True)
+    out = []
+    i = 0
+    while i < len(lines):
+        if "uint32_t __zr_hash = 2166136261u;" in lines[i]:
+            j = i + 1
+            while j < len(lines) and "__zr_hash = zircon_result_hash_combine(" in lines[j]:
+                j += 1
+            if j < len(lines) and 'printf("@@RESULT@@' in lines[j]:
+                i = j + 1
+                continue
+        out.append(lines[i])
+        i += 1
+    return "".join(out)
 
 
 def hash_length_expr(function, item):
@@ -257,15 +277,16 @@ def result_map(log_path):
     return results
 
 
-def compile_host(suite):
-    sources = parse_sources(suite)
-    c_sources = [s for s in sources if s.endswith(".c") and s != "port/src/compat_runtime.c"]
-    bin_path = HOST_BIN_DIR / suite
-    compile_log = HOST_LOG_DIR / f"{suite}.compile.log"
+def compile_host(suite, sources=None, case=None):
+    sources = sources or parse_sources(suite)
+    c_sources = [s for s in sources if s.endswith(".c")]
+    bin_path = HOST_BIN_DIR / (case or suite)
+    compile_log = HOST_LOG_DIR / f"{case or suite}.compile.log"
     cmd = [
         "gcc",
         "-std=gnu99",
         "-O2",
+        "-fno-builtin",
         "-Wall",
         "-Wextra",
         "-Wno-unused-function",
@@ -285,6 +306,39 @@ def compile_host(suite):
     cmd += [str(ROOT / src) for src in c_sources]
     cmd += ["-lm"]
     return run_cmd(cmd, compile_log, timeout=300), bin_path, compile_log
+
+
+def run_case(suite, case):
+    sources = parse_case_sources(suite, case)
+    sim_log = SIM_LOG_DIR / f"{suite}.{case}.log"
+    sim_cmd = [
+        "make",
+        "-C",
+        str(ROOT),
+        "TEST_SYSTEM=benchmark",
+        f"SUITE={suite}",
+        f"TEST_CASE={case}",
+        "USE_SIMULATOR_ONLY_MODE=1",
+        "run",
+    ]
+    sim_rc = run_cmd(sim_cmd, sim_log, timeout=900)
+    host_compile_rc, host_bin, host_compile_log = compile_host(suite, sources=sources, case=case)
+    host_log = HOST_LOG_DIR / f"{suite}.{case}.run.log"
+    host_rc = None
+    if host_compile_rc == 0:
+        host_rc = run_cmd([str(host_bin)], host_log, timeout=300)
+    return {
+        "suite": suite,
+        "case": case,
+        "sim_rc": sim_rc,
+        "host_compile_rc": host_compile_rc,
+        "host_rc": host_rc,
+        "sim_log": sim_log,
+        "host_compile_log": host_compile_log,
+        "host_log": host_log,
+        "sim_results": result_map(sim_log),
+        "host_results": result_map(host_log),
+    }
 
 
 def run_suite(suite):
@@ -314,6 +368,40 @@ def run_suite(suite):
         "host_log": host_log,
         "sim_results": result_map(sim_log),
         "host_results": result_map(host_log),
+    }
+
+
+def compare_case(run):
+    suite = run["suite"]
+    case = run["case"]
+    note = ""
+    if run["sim_rc"] != 0:
+        status = "SIM_FAILED"
+        note = f"sim_rc={run['sim_rc']}"
+    elif run["host_compile_rc"] != 0:
+        status = "HOST_COMPILE_FAILED"
+        note = f"host_compile_rc={run['host_compile_rc']}"
+    elif run["host_rc"] not in (0, None):
+        status = "HOST_RUN_FAILED"
+        note = f"host_rc={run['host_rc']}"
+    else:
+        sim = run["sim_results"].get(case, "")
+        host = run["host_results"].get(case, "")
+        if not sim or not host:
+            status = "MISSING_RESULT"
+        elif sim == host:
+            status = "MATCH"
+        else:
+            status = "MISMATCH"
+    return {
+        "suite": suite,
+        "case": case,
+        "status": status,
+        "sim_result": run["sim_results"].get(case, ""),
+        "host_result": run["host_results"].get(case, ""),
+        "sim_log": str(run["sim_log"]),
+        "host_log": str(run["host_compile_log"] if status == "HOST_COMPILE_FAILED" else run["host_log"]),
+        "note": note,
     }
 
 
@@ -432,8 +520,29 @@ def write_reports(rows):
     RESULT_MD.write_text("\n".join(lines) + "\n")
 
 
+def previous_mismatches():
+    if not RESULT_CSV.exists():
+        raise RuntimeError(f"{RESULT_CSV} does not exist")
+    cases = []
+    with RESULT_CSV.open(newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row.get("status") == "MISMATCH":
+                cases.append((row["suite"], row["case"]))
+    return cases
+
+
 def main():
-    suites = generated_suites()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--only-previous-mismatches",
+        action="store_true",
+        help="rerun only cases marked MISMATCH in the existing CSV report",
+    )
+    args = parser.parse_args()
+
+    cases = previous_mismatches() if args.only_previous_mismatches else []
+    suites = sorted({suite for suite, _ in cases}) if cases else generated_suites()
     clean_log = ROOT / "manifests" / "benchmark_result_compare_clean.log"
     run_cmd(["make", "-s", "-C", str(ROOT.parent.parent / "ZirconSim"), "clean"], clean_log)
     run_cmd(["make", "-C", str(ROOT), "clean"], clean_log)
@@ -444,13 +553,21 @@ def main():
     changed = instrument_benchmark_sources(suites)
     print(f"instrumented {changed} benchmark source files")
     rows = []
-    for idx, suite in enumerate(suites, 1):
-        print(f"[{idx}/{len(suites)}] {suite}", flush=True)
-        suite_rows = compare_suite(run_suite(suite))
-        rows.extend(suite_rows)
-        write_reports(rows)
-        bad = [r for r in suite_rows if r["status"] not in ("MATCH",)]
-        print(f"    rows={len(suite_rows)} bad={len(bad)}", flush=True)
+    if cases:
+        for idx, (suite, case) in enumerate(cases, 1):
+            print(f"[{idx}/{len(cases)}] {suite}/{case}", flush=True)
+            row = compare_case(run_case(suite, case))
+            rows.append(row)
+            write_reports(rows)
+            print(f"    {row['status']}", flush=True)
+    else:
+        for idx, suite in enumerate(suites, 1):
+            print(f"[{idx}/{len(suites)}] {suite}", flush=True)
+            suite_rows = compare_suite(run_suite(suite))
+            rows.extend(suite_rows)
+            write_reports(rows)
+            bad = [r for r in suite_rows if r["status"] not in ("MATCH",)]
+            print(f"    rows={len(suite_rows)} bad={len(bad)}", flush=True)
     write_reports(rows)
     return 0 if all(r["status"] == "MATCH" for r in rows) else 1
 

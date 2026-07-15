@@ -31,6 +31,10 @@ void correlate_riscv_correlate_opt_q7(void)
                           correlate_q7_output, q15_pScratch1, q15_pScratch2);
     BENCH_END(riscv_correlate_opt_q7);
 
+
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, correlate_q7_output, (uint32_t)sizeof(correlate_q7_output));
     printf("@@RESULT@@ case=correlate_riscv_correlate_opt_q7 hash=0x%08x\n", (unsigned int)__zr_hash);

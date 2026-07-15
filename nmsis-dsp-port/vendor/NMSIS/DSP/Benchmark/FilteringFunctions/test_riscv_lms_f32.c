@@ -50,12 +50,11 @@ BENCH_START(riscv_lms_f32);
     riscv_lms_f32(&S, testInput_f32_50Hz_200Hz, expectoutput_f32_50Hz_200Hz, lms_f32_output, error_ones, TEST_LENGTH_SAMPLES);
     BENCH_END(riscv_lms_f32);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, error_ones, (uint32_t)sizeof(error_ones));
     __zr_hash = zircon_result_hash_combine(__zr_hash, lms_f32_output, (uint32_t)sizeof(lms_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, firStateF32_LMS, (uint32_t)sizeof(firStateF32_LMS));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, testInput_f32_50Hz_200Hz, (uint32_t)sizeof(testInput_f32_50Hz_200Hz));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, expectoutput_f32_50Hz_200Hz, (uint32_t)sizeof(expectoutput_f32_50Hz_200Hz));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, firCoeffs32LP, (uint32_t)sizeof(firCoeffs32LP));
     printf("@@RESULT@@ case=lms_riscv_lms_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

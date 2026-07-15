@@ -44,9 +44,11 @@ BENCH_START(riscv_mat_inverse_f32);
     BENCH_END(riscv_mat_inverse_f32);
 
     
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, f32_output, (uint32_t)sizeof(f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, mat_inverse_f32_input, (uint32_t)sizeof(mat_inverse_f32_input));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
     printf("@@RESULT@@ case=matInverse_riscv_mat_inverse_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);

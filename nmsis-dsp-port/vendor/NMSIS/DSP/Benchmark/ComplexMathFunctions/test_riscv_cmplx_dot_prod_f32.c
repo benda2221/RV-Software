@@ -40,9 +40,10 @@ void cmplx_dot_prod_riscv_cmplx_dot_prod_f32(void)
     BENCH_END(riscv_cmplx_dot_prod_f32);
 
     
+
+
+
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, cmplx_dot_prod_f32_input1, (uint32_t)sizeof(cmplx_dot_prod_f32_input1));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, cmplx_dot_prod_f32_input2, (uint32_t)sizeof(cmplx_dot_prod_f32_input2));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &cmplx_dot_prod_f32_realOutput, (uint32_t)sizeof(cmplx_dot_prod_f32_realOutput));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &cmplx_dot_prod_f32_imagOutput, (uint32_t)sizeof(cmplx_dot_prod_f32_imagOutput));
     printf("@@RESULT@@ case=cmplx_dot_prod_riscv_cmplx_dot_prod_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

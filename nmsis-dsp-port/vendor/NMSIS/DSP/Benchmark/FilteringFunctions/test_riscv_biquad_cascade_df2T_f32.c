@@ -42,11 +42,11 @@ BENCH_START(riscv_biquad_cascade_df2T_f32);
     BENCH_END(riscv_biquad_cascade_df2T_f32);
 
     
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, biquad_cascade_df2T_f32_output, (uint32_t)sizeof(biquad_cascade_df2T_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, IIRStateF32, (uint32_t)sizeof(IIRStateF32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, testInput_f32_50Hz_200Hz, (uint32_t)sizeof(testInput_f32_50Hz_200Hz));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, IIRCoeffs32LP, (uint32_t)sizeof(IIRCoeffs32LP));
     printf("@@RESULT@@ case=df2T_riscv_biquad_cascade_df2T_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 return;
 }

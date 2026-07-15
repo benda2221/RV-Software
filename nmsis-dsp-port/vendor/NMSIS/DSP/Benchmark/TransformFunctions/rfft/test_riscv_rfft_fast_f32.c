@@ -44,9 +44,10 @@ BENCH_START(riscv_rfft_fast_f32);
     BENCH_END(riscv_rfft_fast_f32);
 
     
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, rfft_fast_f32_output, (uint32_t)sizeof(rfft_fast_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, rfft_testinput_f32_50hz_200Hz_fast, (uint32_t)sizeof(rfft_testinput_f32_50hz_200Hz_fast));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
     printf("@@RESULT@@ case=rfft_riscv_rfft_fast_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);

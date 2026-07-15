@@ -52,11 +52,9 @@ void svm_riscv_svm_sigmoid_predict_f32(void)
     riscv_svm_sigmoid_predict_f32(&params, f32_input, &result);
     BENCH_END(riscv_svm_sigmoid_predict_f32);
 
+
+
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_input, (uint32_t)sizeof(f32_input));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, dualCoefficients, (uint32_t)sizeof(dualCoefficients));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, supportVectors, (uint32_t)sizeof(supportVectors));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, classes, (uint32_t)sizeof(classes));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
     printf("@@RESULT@@ case=svm_riscv_svm_sigmoid_predict_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

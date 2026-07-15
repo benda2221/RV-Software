@@ -33,6 +33,10 @@ void matVecMult_riscv_mat_vec_mult_q7(void)
     riscv_mat_vec_mult_q7(&q7_A, mat_q7_vec, q7_output);
     BENCH_END(riscv_mat_vec_mult_q7);
 
+
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, q7_output, (uint32_t)sizeof(q7_output));
     printf("@@RESULT@@ case=matVecMult_riscv_mat_vec_mult_q7 hash=0x%08x\n", (unsigned int)__zr_hash);

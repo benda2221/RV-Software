@@ -18,7 +18,6 @@ static uint32_t zircon_result_hash_combine(uint32_t hash, const void *data, uint
     return hash;
 }
 
-
 void sin_cos_riscv_sin_cos_q31(void)
 {
     volatile int i;

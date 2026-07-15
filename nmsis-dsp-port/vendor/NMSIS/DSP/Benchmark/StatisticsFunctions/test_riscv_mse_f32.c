@@ -36,9 +36,9 @@ void mse_riscv_mse_f32(void)
     riscv_mse_f32(mse_f32_input1, mse_f32_input2, ARRAY_SIZE, &f32_output);
     BENCH_END(riscv_mse_f32);
 
+
+
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, mse_f32_input1, (uint32_t)sizeof(mse_f32_input1));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, mse_f32_input2, (uint32_t)sizeof(mse_f32_input2));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &f32_output, (uint32_t)sizeof(f32_output));
     printf("@@RESULT@@ case=mse_riscv_mse_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

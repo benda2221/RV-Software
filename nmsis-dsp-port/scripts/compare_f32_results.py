@@ -227,11 +227,11 @@ def host_compile_and_run(row):
     suite = row['suite']
     function = row['function']
     sources = parse_sources(suite, function)
-    c_sources = [s for s in sources if s.endswith('.c') and s != 'port/src/compat_runtime.c']
+    c_sources = [s for s in sources if s.endswith('.c')]
     bin_path = HOST_BIN_DIR / function
     compile_log = HOST_LOG_DIR / f'{suite}__{function}.compile.log'
     run_log = HOST_LOG_DIR / f'{suite}__{function}.run.log'
-    cmd = ['gcc', '-std=gnu99', '-O2', '-Wall', '-Wextra', '-Wno-unused-function', '-Wno-unused-variable', '-Wno-unused-parameter']
+    cmd = ['gcc', '-std=gnu99', '-O2', '-fno-builtin', '-Wall', '-Wextra', '-Wno-unused-function', '-Wno-unused-variable', '-Wno-unused-parameter']
     cmd += ['-iquote', str(ROOT / 'port/include')]
     for inc in [
         'vendor/NMSIS/DSP/Include',

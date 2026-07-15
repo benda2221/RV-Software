@@ -61,13 +61,11 @@ BENCH_START(riscv_mat_cholesky_f32);
     BENCH_END(riscv_mat_cholesky_f32);
 
     
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, f32_output, (uint32_t)sizeof(f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_input_array, (uint32_t)sizeof(f32_input_array));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_posi_array, (uint32_t)sizeof(f32_posi_array));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_dot_array, (uint32_t)sizeof(f32_dot_array));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_tmp_array, (uint32_t)sizeof(f32_tmp_array));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, &tmp, (uint32_t)sizeof(tmp));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
     printf("@@RESULT@@ case=matCholesky_riscv_mat_cholesky_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);

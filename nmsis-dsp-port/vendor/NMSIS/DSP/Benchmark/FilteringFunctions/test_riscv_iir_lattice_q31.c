@@ -34,6 +34,10 @@ void iirLattice_riscv_iir_lattice_q31(void)
     riscv_iir_lattice_q31(&S, testInput_q31_50Hz_200Hz, iir_lattice_q31_output, TEST_LENGTH_SAMPLES);
     BENCH_END(riscv_iir_lattice_q31);
 
+
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, iir_lattice_q31_output, (uint32_t)sizeof(iir_lattice_q31_output));
     printf("@@RESULT@@ case=iirLattice_riscv_iir_lattice_q31 hash=0x%08x\n", (unsigned int)__zr_hash);

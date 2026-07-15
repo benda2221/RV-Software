@@ -47,9 +47,11 @@ BENCH_START(riscv_sqrt_f32);
     BENCH_END(riscv_sqrt_f32);
 
     
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, sqrt_f32_output, (uint32_t)sizeof(sqrt_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, sqrt_f32_input, (uint32_t)sizeof(sqrt_f32_input));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
     printf("@@RESULT@@ case=sqrt_riscv_sqrt_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);

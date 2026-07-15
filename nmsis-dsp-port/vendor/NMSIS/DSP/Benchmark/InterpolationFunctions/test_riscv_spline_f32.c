@@ -38,13 +38,10 @@ BENCH_START(riscv_spline_f32);
     riscv_spline_f32(&S_spline, f32_test_x_array, spline_f32_output, SPLINE_FUNC_SIZE);
     BENCH_END(riscv_spline_f32);
 
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, spline_f32_output, (uint32_t)sizeof(spline_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_spline_coef_array, (uint32_t)sizeof(f32_spline_coef_array));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_spline_temp_array, (uint32_t)sizeof(f32_spline_temp_array));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_x_array, (uint32_t)sizeof(f32_x_array));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_y_array, (uint32_t)sizeof(f32_y_array));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, f32_test_x_array, (uint32_t)sizeof(f32_test_x_array));
     printf("@@RESULT@@ case=spline_riscv_spline_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }
 

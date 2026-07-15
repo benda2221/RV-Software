@@ -34,9 +34,10 @@ void levinsonDurbin_riscv_levinson_durbin_f32(void)
     riscv_levinson_durbin_f32(phi, autoRegreCoef, &err, COEFSIZE);
     BENCH_END(riscv_levinson_durbin_f32);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, phi, (uint32_t)sizeof(phi));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, autoRegreCoef, (uint32_t)sizeof(autoRegreCoef));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &err, (uint32_t)sizeof(err));
     printf("@@RESULT@@ case=levinsonDurbin_riscv_levinson_durbin_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

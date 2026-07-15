@@ -27,6 +27,9 @@ void sokalmichener_distance_riscv_sokalmichener_distance(void)
     sokalmichener_distance_f32_output = riscv_sokalmichener_distance(u32_sokalmichener_a_array, u32_sokalmichener_b_array, 36);
     BENCH_END(riscv_sokalmichener_distance);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &sokalmichener_distance_f32_output, (uint32_t)sizeof(sokalmichener_distance_f32_output));
     printf("@@RESULT@@ case=sokalmichener_distance_riscv_sokalmichener_distance hash=0x%08x\n", (unsigned int)__zr_hash);

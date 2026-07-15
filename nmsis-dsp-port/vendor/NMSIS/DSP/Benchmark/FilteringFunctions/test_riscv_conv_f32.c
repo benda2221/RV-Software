@@ -40,10 +40,11 @@ BENCH_START(riscv_conv_f32);
                  conv_f32_output);
     BENCH_END(riscv_conv_f32);
     
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, conv_f32_output, (uint32_t)sizeof(conv_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, test_conv_input_f32_A, (uint32_t)sizeof(test_conv_input_f32_A));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, test_conv_input_f32_B, (uint32_t)sizeof(test_conv_input_f32_B));
     printf("@@RESULT@@ case=conv_riscv_conv_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 return;
 }

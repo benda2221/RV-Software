@@ -43,11 +43,10 @@ BENCH_START(riscv_iir_lattice_f32);
     riscv_iir_lattice_f32(&S, testInput_f32_50Hz_200Hz, iir_lattice_f32_output, TEST_LENGTH_SAMPLES);
     BENCH_END(riscv_iir_lattice_f32);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, iir_lattice_f32_output, (uint32_t)sizeof(iir_lattice_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, IIRStateF32, (uint32_t)sizeof(IIRStateF32));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, testInput_f32_50Hz_200Hz, (uint32_t)sizeof(testInput_f32_50Hz_200Hz));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, IIRCoeffs32LP_K, (uint32_t)sizeof(IIRCoeffs32LP_K));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, IIRCoeffs32LP_V, (uint32_t)sizeof(IIRCoeffs32LP_V));
     printf("@@RESULT@@ case=iirLattice_riscv_iir_lattice_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

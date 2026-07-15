@@ -32,6 +32,10 @@ void convPartial_riscv_conv_partial_fast_opt_q15(void)
                                   numPoints, q15_pScratch1, q15_pScratch2);
     BENCH_END(riscv_conv_partial_fast_opt_q15);
 
+
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, conv_q15_output, (uint32_t)sizeof(conv_q15_output));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));

@@ -41,6 +41,10 @@ void firDecimate_riscv_fir_decimate_q15(void)
     riscv_fir_decimate_q15(&S, testInput_q15_50Hz_200Hz, decimate_q15_output, TEST_LENGTH_SAMPLES);
     BENCH_END(riscv_fir_decimate_q15);
 
+
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, decimate_q15_output, (uint32_t)sizeof(decimate_q15_output));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));

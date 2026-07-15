@@ -31,6 +31,9 @@ void mul_riscv_mul_q7(void)
     riscv_mult_q7(mult_q7_input1, mult_q7_input2, mult_q7_output, ARRAY_SIZE_Q7);
     BENCH_END(riscv_mult_q7);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, mult_q7_output, (uint32_t)sizeof(mult_q7_output));
     printf("@@RESULT@@ case=mul_riscv_mul_q7 hash=0x%08x\n", (unsigned int)__zr_hash);

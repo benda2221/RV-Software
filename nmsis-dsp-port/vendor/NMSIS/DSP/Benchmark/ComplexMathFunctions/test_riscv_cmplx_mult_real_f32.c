@@ -40,10 +40,11 @@ BENCH_START(riscv_cmplx_mult_real_f32);
     BENCH_END(riscv_cmplx_mult_real_f32);
 
     
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, cmplx_mult_real_f32_output, (uint32_t)sizeof(cmplx_mult_real_f32_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, cmplx_mult_real_f32_input1, (uint32_t)sizeof(cmplx_mult_real_f32_input1));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, cmplx_mult_real_f32_input2, (uint32_t)sizeof(cmplx_mult_real_f32_input2));
     printf("@@RESULT@@ case=cmplx_mult_real_riscv_cmplx_mult_real_f32 hash=0x%08x\n", (unsigned int)__zr_hash);
 return;
 }

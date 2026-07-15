@@ -29,6 +29,9 @@ void var_riscv_var_q31(void)
     riscv_var_q31(var_q31_input, ARRAY_SIZE, &q31_output);
     BENCH_END(riscv_var_q31);
 
+
+
+
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &q31_output, (uint32_t)sizeof(q31_output));
     printf("@@RESULT@@ case=var_riscv_var_q31 hash=0x%08x\n", (unsigned int)__zr_hash);
