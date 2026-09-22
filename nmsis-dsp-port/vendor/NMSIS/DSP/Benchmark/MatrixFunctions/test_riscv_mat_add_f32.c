@@ -45,10 +45,6 @@ BENCH_START(riscv_mat_add_f32);
     riscv_status result = riscv_mat_add_f32(&f32_A, &f32_B, &f32_des);
     BENCH_END(riscv_mat_add_f32);
 
-    
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, mat_add_f32_output, (uint32_t)sizeof(mat_add_f32_output));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));

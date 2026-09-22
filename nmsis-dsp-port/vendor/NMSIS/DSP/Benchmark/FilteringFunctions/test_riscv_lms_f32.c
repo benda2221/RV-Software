@@ -50,9 +50,6 @@ BENCH_START(riscv_lms_f32);
     riscv_lms_f32(&S, testInput_f32_50Hz_200Hz, expectoutput_f32_50Hz_200Hz, lms_f32_output, error_ones, TEST_LENGTH_SAMPLES);
     BENCH_END(riscv_lms_f32);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, error_ones, (uint32_t)sizeof(error_ones));
     __zr_hash = zircon_result_hash_combine(__zr_hash, lms_f32_output, (uint32_t)sizeof(lms_f32_output));

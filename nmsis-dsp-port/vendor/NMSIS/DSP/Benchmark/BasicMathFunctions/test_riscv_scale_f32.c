@@ -39,8 +39,6 @@ BENCH_START(riscv_scale_f32);
     riscv_scale_f32(scale_f32_input, scale_f32, scale_f32_output, ARRAY_SIZE_F32);
     BENCH_END(riscv_scale_f32);
 
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, scale_f32_output, (uint32_t)sizeof(scale_f32_output));
     printf("@@RESULT@@ case=scale_riscv_scale_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

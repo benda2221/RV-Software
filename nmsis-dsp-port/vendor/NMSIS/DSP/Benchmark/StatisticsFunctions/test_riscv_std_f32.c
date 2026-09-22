@@ -36,8 +36,6 @@ void std_riscv_std_f32(void)
     riscv_std_f32(std_f32_input, ARRAY_SIZE, &f32_output);
     BENCH_END(riscv_std_f32);
 
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &f32_output, (uint32_t)sizeof(f32_output));
     printf("@@RESULT@@ case=std_riscv_std_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

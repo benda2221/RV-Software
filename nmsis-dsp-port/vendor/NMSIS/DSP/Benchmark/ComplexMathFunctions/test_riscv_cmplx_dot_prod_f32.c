@@ -39,10 +39,6 @@ void cmplx_dot_prod_riscv_cmplx_dot_prod_f32(void)
                            &cmplx_dot_prod_f32_imagOutput);
     BENCH_END(riscv_cmplx_dot_prod_f32);
 
-    
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &cmplx_dot_prod_f32_realOutput, (uint32_t)sizeof(cmplx_dot_prod_f32_realOutput));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &cmplx_dot_prod_f32_imagOutput, (uint32_t)sizeof(cmplx_dot_prod_f32_imagOutput));

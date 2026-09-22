@@ -38,10 +38,6 @@ void park_riscv_park_q31(void)
     }
     BENCH_END(riscv_park_q31);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, pId_q31, (uint32_t)sizeof(pId_q31));
     __zr_hash = zircon_result_hash_combine(__zr_hash, pIq_q31, (uint32_t)sizeof(pIq_q31));

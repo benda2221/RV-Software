@@ -35,10 +35,6 @@ void inv_clarke_riscv_inv_clarke_q31(void)
     }
     BENCH_END(riscv_inv_clarke_q31);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, Ia_q31, (uint32_t)sizeof(Ia_q31));
     __zr_hash = zircon_result_hash_combine(__zr_hash, Ib_q31, (uint32_t)sizeof(Ib_q31));

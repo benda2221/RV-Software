@@ -27,9 +27,6 @@ void rogerstanimoto_distance_riscv_rogerstanimoto_distance(void)
     rogerstanimoto_distance_f32_output = riscv_rogerstanimoto_distance(u32_rogerstanimoto_a_array, u32_rogerstanimoto_b_array, 36);
     BENCH_END(riscv_rogerstanimoto_distance);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &rogerstanimoto_distance_f32_output, (uint32_t)sizeof(rogerstanimoto_distance_f32_output));
     printf("@@RESULT@@ case=rogerstanimoto_distance_riscv_rogerstanimoto_distance hash=0x%08x\n", (unsigned int)__zr_hash);

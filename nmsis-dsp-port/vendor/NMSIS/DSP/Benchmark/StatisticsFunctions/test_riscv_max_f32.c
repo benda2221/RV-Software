@@ -37,8 +37,6 @@ void max_riscv_max_f32(void)
     riscv_max_f32(max_f32_input, ARRAY_SIZE, &f32_output, &index);
     BENCH_END(riscv_max_f32);
 
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &f32_output, (uint32_t)sizeof(f32_output));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &index, (uint32_t)sizeof(index));

@@ -100,6 +100,7 @@ BENCHMARK_FLOAT32_ALLOWED = {
     "vendor/NMSIS/DSP/Benchmark/TransformFunctions/rfft/test_riscv_rfft_f32.c",
 }
 BENCHMARK_FLOAT_HELPER_ALLOWED = {
+    "vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_q15.c",
     "vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_inv_park_q31.c",
     "vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_park_q31.c",
     "vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_q31.c",
@@ -139,9 +140,7 @@ BOOLEAN_DISTANCE_SYMBOLS = (
     "riscv_boolean_distance_TT_FF_TF_FT",
     "riscv_boolean_distance_TT",
 )
-BENCHMARK_BACKEND_ERROR_CASES = {
-    "vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_q15.c",
-}
+BENCHMARK_BACKEND_ERROR_CASES = set()
 MATH_RE = re.compile(r"\b(?:sqrtf?|sinf?|cosf?|logf?|expf?|powf?|atan2f?|floorf?|ceilf?)\s*\(")
 FUNC_RE = re.compile(r"^\s*void\s+([A-Za-z0-9_]+)\s*\(\s*void\s*\)", re.MULTILINE)
 MAIN_RE = re.compile(r"\bmain\s*\(")
@@ -261,8 +260,18 @@ def included_c_sources(path: pathlib.Path, seen=None):
         seen = set()
     found = []
     for include in INCLUDE_C_RE.findall(path.read_text(errors="ignore")):
-        candidate = (path.parent / include).resolve()
-        if not candidate.exists() or candidate in seen:
+        # Match the include search roots used by the port Makefile.  Several
+        # nested legacy tests include "../HelperFunctions/*.c"; that spelling
+        # only resolves through Test/BasicMathFunctions, not relative to the
+        # source file itself.  Missing it here makes the dependency scanner add
+        # the already textually included helper as a separate translation unit.
+        candidates = (
+            (path.parent / include).resolve(),
+            (DSP / "Test" / "BasicMathFunctions" / include).resolve(),
+            (DSP / "Test" / include).resolve(),
+        )
+        candidate = next((item for item in candidates if item.exists()), None)
+        if candidate is None or candidate in seen:
             continue
         try:
             candidate.relative_to(ROOT)
@@ -844,7 +853,7 @@ def write_manifest(rows):
             f.write(f"- {system} {status}: {count}\n")
         f.write("\nGenerated executable inputs:\n")
         f.write("\n- benchmark/* integer/fixed-point, f32, and validated non-f16/f64 helper C runners generated from NMSIS Benchmark test_*.c\n")
-        f.write("- benchmark/ControllerFunctions/pid_riscv_pid_q15 single-case runner for reproducing the current Dandelion VLIW backend error; manifest status remains skipped\n")
+        f.write("- benchmark/ControllerFunctions/pid_riscv_pid_q15 is enabled after the Dandelion packetizer inline-asm fix\n")
         f.write("- legacy/BasicMathFunctions Zircon fixed-point runner, 30 q7/q15/q31 checks\n")
         f.write("- legacy/*/cases/* single-source entries for every upstream NMSIS Test/*.c file; sources with upstream main use that main, no-main sources use a compile-link smoke runner\n")
         f.write("- testing_smoke/BasicMaths Q7/Q15/Q31 pattern-driven calls without numeric assertions\n")
@@ -854,9 +863,9 @@ def write_manifest(rows):
         f.write("\n\nAll generated Benchmark suite directories are included in the default list. All Benchmark cases whose source file is f32 are enabled; no benchmark f32 case remains skipped.\n")
         f.write("Additional non-f16/f64 Benchmark helper cases are enabled after single-case validation, including q15/q31 controller/filtering, boolean distance, and float/fixed conversion paths.\n")
         f.write("Distance boolean helper dependency closure includes riscv_boolean_distance.c and generated helper symbols, and dependency scanning ignores comments.\n")
-        f.write("Benchmark runs default to USE_SIMULATOR_ONLY_MODE=1 from nmsis-dsp-port so f32 cases avoid the current F-instruction difftest path. Override USE_SIMULATOR_ONLY_MODE=0 when validating that path.\n")
-        f.write("Remaining Benchmark skips are f16/f64-oriented deferred areas plus the known pid_q15 Dandelion VLIW backend error.\n")
-        f.write("The original legacy BasicMath main is tracked but replaced because f32 trips the current F-instruction difftest path and unsigned logical tests trip an lbu difftest mismatch in that runner.\n")
+        f.write("Benchmark runs default to USE_SIMULATOR_ONLY_MODE=1. Override USE_SIMULATOR_ONLY_MODE=0 to compare both GPR and FPR writes against the reference simulator.\n")
+        f.write("Remaining Benchmark skips are f16/f64-oriented deferred areas.\n")
+        f.write("The upstream legacy BasicMath main is preserved under test-backups/ and excluded from discovery; its aligned replacement keeps every wide-logical test buffer 8-byte aligned.\n")
         f.write("All upstream legacy C sources are generated as per-case executable entries. Sources that already define main use their upstream entry point; no-main reference/helper sources use a compile-link smoke runner. Some generated legacy cases are expected to expose reference compile errors or runtime numeric/SNR mismatches until their helpers and tolerances are ported.\n")
         f.write("Most `Testing` C++ suites are tracked but skipped until either a C++ standard library/runtime shim or a suite-specific C smoke runner is available.\n")
 

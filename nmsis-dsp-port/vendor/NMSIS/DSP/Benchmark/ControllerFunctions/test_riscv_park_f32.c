@@ -49,10 +49,6 @@ BENCH_START(riscv_park_f32);
     }
     BENCH_END(riscv_park_f32);
 
-    
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, pId_f32, (uint32_t)sizeof(pId_f32));
     __zr_hash = zircon_result_hash_combine(__zr_hash, pIq_f32, (uint32_t)sizeof(pIq_f32));

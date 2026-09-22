@@ -34,10 +34,6 @@ void divide_riscv_divide_q15(void)
     }
     BENCH_END(riscv_divide_q15);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, divide_q15_output, (uint32_t)sizeof(divide_q15_output));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));

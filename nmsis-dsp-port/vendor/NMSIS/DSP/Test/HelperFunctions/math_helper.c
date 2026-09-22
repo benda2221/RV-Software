@@ -36,7 +36,7 @@ float riscv_snr_f32(float *pRef, float *pTest, uint32_t buffSize)
         return (0);
     }
 
-    SNR = 10 * log10(EnergySignal / EnergyError);
+    SNR = 10.0f * log10f(EnergySignal / EnergyError);
 
     return (SNR);
 }
@@ -120,6 +120,7 @@ void ref_cofact(float32_t *pSrc, float32_t *pDst, float32_t *temp,
     }
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 float64_t ref_detrm64(float64_t *pSrc, float64_t *temp, uint32_t size)
 {
     float64_t s = 1, det = 0;
@@ -198,3 +199,4 @@ void ref_cofact64(float64_t *pSrc, float64_t *pDst, float64_t *temp,
         }
     }
 }
+#endif

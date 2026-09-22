@@ -41,12 +41,8 @@ void firDecimate_riscv_fir_decimate_q31(void)
     riscv_fir_decimate_q31(&S, testInput_q31_50Hz_200Hz, decimate_q31_output, TEST_LENGTH_SAMPLES);
     BENCH_END(riscv_fir_decimate_q31);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, decimate_q31_output, (uint32_t)sizeof(decimate_q31_output));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, decimate_q31_output, (uint32_t)((TEST_LENGTH_SAMPLES / M) * sizeof(decimate_q31_output[0])));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
     printf("@@RESULT@@ case=firDecimate_riscv_fir_decimate_q31 hash=0x%08x\n", (unsigned int)__zr_hash);
 TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);

@@ -37,10 +37,6 @@ void firInterpolate_riscv_fir_interpolate_q31(void)
                                 interpolate_q31_output, TEST_LENGTH_SAMPLES);
     BENCH_END(riscv_fir_interpolate_q31);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, interpolate_q31_output, (uint32_t)sizeof(interpolate_q31_output));
     printf("@@RESULT@@ case=firInterpolate_riscv_fir_interpolate_q31 hash=0x%08x\n", (unsigned int)__zr_hash);

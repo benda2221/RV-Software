@@ -29,10 +29,6 @@ void vlog_riscv_vlog_q15(void)
     riscv_vlog_q15(vlog_q15_input, vlog_q15_output, ARRAY_SIZE_Q15);
     BENCH_END(riscv_vlog_q15);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, vlog_q15_output, (uint32_t)sizeof(vlog_q15_output));
     printf("@@RESULT@@ case=vlog_riscv_vlog_q15 hash=0x%08x\n", (unsigned int)__zr_hash);

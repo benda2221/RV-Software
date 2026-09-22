@@ -20,8 +20,9 @@ INC_PATH += -I$(BASE_PORT)/base/include
 INC_PATH += -I$(BASE_PORT)/tool/include
 
 # FLAGS and LIBS
-CFLAGS    += -O2 -Wall -Werror $(INC_PATH) -Wno-main -fno-asynchronous-unwind-tables -fno-builtin -fno-stack-protector -MMD --target=riscv32-unknown-unknown -mcpu=dandelion -march=rv32imfd 
-AFLAGS 	  += -MMD $(INC_PATH) --target=riscv32-unknown-unknown -mcpu=dandelion -march=rv32imfd 
+CFLAGS    += -O2 -Wall -Werror $(INC_PATH) -Wno-main -fno-asynchronous-unwind-tables -fno-builtin -fno-stack-protector -ffp-contract=off -MMD --target=riscv32-unknown-unknown -mcpu=dandelion -march=rv32imf
+AFLAGS 	  += -MMD $(INC_PATH) --target=riscv32-unknown-unknown -mcpu=dandelion -march=rv32imf
+LLCFLAGS  += --fp-contract=off -riscv-enable-pipeliner -riscv-disable-shallow-dependency=false
 LDFLAGS   += -T $(BASE_PORT)/script/linker.ld --defsym=_pmem_start=0x80000000 --defsym=_entry_offset=0x0 
 LIBS 	  += $(BASE_PORT)/base/build/libbase.a $(BASE_PORT)/tool/build/libtool.a
 LINKAGE   = $(OBJS) $(LIBS)
@@ -53,17 +54,18 @@ $(IR_DIR)/%.ll: %.c
 # Step 2: Compile IR to assembly (.s)
 $(ASM_DIR)/%.s: $(IR_DIR)/%.ll
 	@mkdir -p $(dir $@) && printf "$(COLOR_YELLOW)[LLC]$(COLOR_NONE) $<\n"
-	@$(LLC) -mtriple=riscv32 -mcpu=dandelion -mattr=+m,+f,+d -filetype=asm -o $@ $<
+	@$(LLC) $(LLCFLAGS) -mtriple=riscv32 -mcpu=dandelion -mattr=+m,+f,-d,-unaligned-scalar-mem -filetype=asm -o $@ $<
+
+# Hand-written assembly (.S) bypasses IR pipeline. Keep this rule before the
+# generated-assembly rule so clean assembly-only tests do not require .ll files.
+$(TAR_DIR)/%.o: %.S
+	@mkdir -p $(dir $@) && printf "$(COLOR_YELLOW)[AS]$(COLOR_NONE) $<\n"
+	@$(AS) $(AFLAGS) -c -o $@ $(realpath $<)
 
 # Step 3: Assemble .s to object file (.o)
 $(TAR_DIR)/%.o: $(ASM_DIR)/%.s
 	@mkdir -p $(dir $@) && printf "$(COLOR_YELLOW)[AS]$(COLOR_NONE) $<\n"
 	@$(AS) $(AFLAGS) -c -o $@ $<
-
-# Hand-written assembly (.S) bypasses IR pipeline
-$(TAR_DIR)/%.o: %.S
-	@mkdir -p $(dir $@) && printf "$(COLOR_YELLOW)[AS]$(COLOR_NONE) $<\n"
-	@$(AS) $(AFLAGS) -c -o $@ $(realpath $<)
 
 # make libbase
 $(LIBS):

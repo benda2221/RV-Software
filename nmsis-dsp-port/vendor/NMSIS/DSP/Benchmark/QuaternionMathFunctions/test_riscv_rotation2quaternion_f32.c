@@ -38,9 +38,6 @@ BENCH_START(riscv_rotation2quaternion_f32);
     riscv_rotation2quaternion_f32(rotation2quaternion_f32_input, f32_output, ARRAY_SIZE);
     BENCH_END(riscv_rotation2quaternion_f32);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, f32_output, (uint32_t)sizeof(f32_output));
     printf("@@RESULT@@ case=rotation2quaternion_riscv_rotation2quaternion_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

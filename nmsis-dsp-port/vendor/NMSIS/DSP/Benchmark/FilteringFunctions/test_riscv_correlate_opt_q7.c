@@ -31,12 +31,8 @@ void correlate_riscv_correlate_opt_q7(void)
                           correlate_q7_output, q15_pScratch1, q15_pScratch2);
     BENCH_END(riscv_correlate_opt_q7);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, correlate_q7_output, (uint32_t)sizeof(correlate_q7_output));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, correlate_q7_output + ((ARRAYA_SIZE_Q7 >= ARRAYB_SIZE_Q7) ? (ARRAYA_SIZE_Q7 - ARRAYB_SIZE_Q7) : 0u), (uint32_t)((ARRAYA_SIZE_Q7 + ARRAYB_SIZE_Q7 - 1u) * sizeof(correlate_q7_output[0])));
     printf("@@RESULT@@ case=correlate_riscv_correlate_opt_q7 hash=0x%08x\n", (unsigned int)__zr_hash);
 return;
 }

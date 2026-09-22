@@ -1,6 +1,6 @@
 LEGACY_CASES := \
   BasicMathFunctions:ref_basic_math_functions \
-  BasicMathFunctions:riscv_basic_math_functions \
+  BasicMathFunctions:riscv_basic_math_functions_aligned \
   BayesianFunctions:riscv_bayesian \
   ComplexMathFunctions:ref_riscv_cmplx_math \
   ComplexMathFunctions:riscv_cmplx_math \

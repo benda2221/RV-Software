@@ -63,6 +63,8 @@ compiler intrinsics, and test reporting there instead of editing imported
 NMSIS sources. Minimal math-library compatibility for Benchmark f32 execution
 lives in `port/include/math.h` and `port/src/compat_runtime.c`; it is intended
 to make the benchmark runners link and execute, not to replace a full libm.
+The target is currently RV32IMF (`-march=rv32imf`, LLC `+m,+f,-d`); f32
+helpers must use float constants/functions, while f64 cases remain skipped.
 
 ## Remaining Deferred Areas
 

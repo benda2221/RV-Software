@@ -1,6 +1,6 @@
-TEST_NAME := nmsis-dsp-legacy-basicmathfunctions-riscv_basic_math_functions
+TEST_NAME := nmsis-dsp-legacy-basicmathfunctions-riscv_basic_math_functions_aligned
 TEST_SRCS := \
-  vendor/NMSIS/DSP/Test/BasicMathFunctions/riscv_basic_math_functions.c \
+  vendor/NMSIS/DSP/Test/BasicMathFunctions/riscv_basic_math_functions_aligned.c \
   vendor/NMSIS/DSP/Test/BasicMathFunctions/ref_basic_math_functions.c \
   vendor/NMSIS/DSP/Source/BasicMathFunctions/riscv_abs_f32.c \
   vendor/NMSIS/DSP/Source/BasicMathFunctions/riscv_abs_q15.c \

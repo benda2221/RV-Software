@@ -98,7 +98,7 @@ benchmark,ControllerFunctions,vendor/NMSIS/DSP/Benchmark/ControllerFunctions/tes
 benchmark,ControllerFunctions,vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_park_f32.c,enabled,
 benchmark,ControllerFunctions,vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_park_q31.c,enabled,
 benchmark,ControllerFunctions,vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_f32.c,enabled,
-benchmark,ControllerFunctions,vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_q15.c,skipped,floating_point
+benchmark,ControllerFunctions,vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_q15.c,enabled,
 benchmark,ControllerFunctions,vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_q31.c,enabled,
 benchmark,ControllerFunctions,vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_sin_cos_f32.c,enabled,
 benchmark,ControllerFunctions,vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_sin_cos_q31.c,enabled,
@@ -459,7 +459,7 @@ benchmark,TransformFunctions,vendor/NMSIS/DSP/Benchmark/TransformFunctions/rfft/
 benchmark,TransformFunctions,vendor/NMSIS/DSP/Benchmark/TransformFunctions/rfft/test_riscv_rfft_q31.c,enabled,
 legacy,BasicMathFunctions,port/src/legacy_basicmath_fixed_runner.c,enabled,zircon_fixed_runner
 legacy,BasicMathFunctions,vendor/NMSIS/DSP/Test/BasicMathFunctions/ref_basic_math_functions.c,enabled,generated_legacy_case
-legacy,BasicMathFunctions,vendor/NMSIS/DSP/Test/BasicMathFunctions/riscv_basic_math_functions.c,enabled,generated_legacy_case
+legacy,BasicMathFunctions,vendor/NMSIS/DSP/Test/BasicMathFunctions/riscv_basic_math_functions_aligned.c,enabled,generated_legacy_case
 legacy,BayesianFunctions,vendor/NMSIS/DSP/Test/BayesianFunctions/riscv_bayesian.c,enabled,generated_legacy_case
 legacy,ComplexMathFunctions,vendor/NMSIS/DSP/Test/ComplexMathFunctions/ref_riscv_cmplx_math.c,enabled,generated_legacy_case
 legacy,ComplexMathFunctions,vendor/NMSIS/DSP/Test/ComplexMathFunctions/riscv_cmplx_math.c,enabled,generated_legacy_case

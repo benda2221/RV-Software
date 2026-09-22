@@ -37,9 +37,6 @@ void jensenshannon_distance_riscv_jensenshannon_distance_f32(void)
     jensenshannon_distance_f32_output = riscv_jensenshannon_distance_f32(jensenshannon_distance_f32_input1, jensenshannon_distance_f32_input2, ARRAY_SIZE_F32);
     BENCH_END(riscv_jensenshannon_distance_f32);
 
-    
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &jensenshannon_distance_f32_output, (uint32_t)sizeof(jensenshannon_distance_f32_output));
     printf("@@RESULT@@ case=jensenshannon_distance_riscv_jensenshannon_distance_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

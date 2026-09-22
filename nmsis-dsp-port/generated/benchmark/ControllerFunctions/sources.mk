@@ -10,11 +10,14 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_park_f32.c \
   vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_park_q31.c \
   vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_f32.c \
+  vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_q15.c \
   vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_pid_q31.c \
   vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_sin_cos_f32.c \
   vendor/NMSIS/DSP/Benchmark/ControllerFunctions/test_riscv_sin_cos_q31.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_float_to_q31.c \
   vendor/NMSIS/DSP/Source/ControllerFunctions/riscv_pid_init_f32.c \
+  vendor/NMSIS/DSP/Source/SupportFunctions/riscv_float_to_q15.c \
+  vendor/NMSIS/DSP/Source/ControllerFunctions/riscv_pid_init_q15.c \
   vendor/NMSIS/DSP/Source/ControllerFunctions/riscv_pid_init_q31.c \
   vendor/NMSIS/DSP/Source/ControllerFunctions/riscv_sin_cos_f32.c \
   vendor/NMSIS/DSP/Source/ControllerFunctions/riscv_sin_cos_q31.c \

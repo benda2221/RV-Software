@@ -99,7 +99,7 @@ int8_t verify_results_q31_as_f32(q31_t * ref, q31_t * opt, int length)
     {
         float32_t fref = (float32_t)ref[i] / INT32_MAX;
         float32_t fopt = (float32_t)opt[i] / INT32_MAX;
-        if (fabs(fref - fopt) > DELTAF32)
+        if (fabsf(fref - fopt) > DELTAF32)
         {
             printf("Q31 Output mismatch at %d, expected %d, actual %d\r\n", i, ref[i], opt[i]);
             flag = 1;
@@ -207,15 +207,19 @@ int8_t verify_results_f32(float32_t * ref, float32_t * opt, int length)
 
     for (int i = 0; i < length; i++)
     {
-        if (fabs(ref[i] - opt[i]) > DELTAF32)
+        if (fabsf(ref[i] - opt[i]) > DELTAF32)
         {
-            printf("f32 Output mismatch at %d, expected %f, actual %f\r\n", i, ref[i], opt[i]);
+            union { float32_t f; uint32_t u; } expected = { ref[i] }, actual = { opt[i] };
+            printf("f32 Output mismatch at %d, expected bits 0x%x, actual bits 0x%x\r\n",
+                   i, expected.u, actual.u);
 
             flag = 1;
             break;
         }
 #ifdef LOG_DEBUG
-        printf("f32 Output at %d, expected %f, actual %f\r\n", i, ref[i], opt[i]);
+        union { float32_t f; uint32_t u; } expected = { ref[i] }, actual = { opt[i] };
+        printf("f32 Output at %d, expected bits 0x%x, actual bits 0x%x\r\n",
+               i, expected.u, actual.u);
 #endif
     }
 
@@ -234,7 +238,7 @@ int8_t verify_results_f16(float16_t * ref, float16_t * opt, int length)
     {
         f32_ref = (float32_t)ref[i];
         f32_opt = (float32_t)opt[i];
-        if (fabs(f32_ref - f32_opt) > DELTAF32)
+        if (fabsf(f32_ref - f32_opt) > DELTAF32)
         {
             printf("f16Tof32 Output mismatch at %d, expected %f, actual %f\r\n", i, f32_ref, f32_opt);
 
@@ -257,21 +261,26 @@ int8_t verify_results_f32_low_precision(float32_t * ref, float32_t * opt, int le
 
     for (int i = 0; i < length; i++)
     {
-        if (fabs(ref[i] - opt[i]) > DELTAF32_LOW_PRECISION)
+        if (fabsf(ref[i] - opt[i]) > DELTAF32_LOW_PRECISION)
         {
-            printf("f32 Output mismatch at %d, expected %f, actual %f\r\n", i, ref[i], opt[i]);
+            union { float32_t f; uint32_t u; } expected = { ref[i] }, actual = { opt[i] };
+            printf("f32 Output mismatch at %d, expected bits 0x%x, actual bits 0x%x\r\n",
+                   i, expected.u, actual.u);
 
             flag = 1;
             break;
         }
 #ifdef LOG_DEBUG
-        printf("f32 Output at %d, expected %f, actual %f\r\n", i, ref[i], opt[i]);
+        union { float32_t f; uint32_t u; } expected = { ref[i] }, actual = { opt[i] };
+        printf("f32 Output at %d, expected bits 0x%x, actual bits 0x%x\r\n",
+               i, expected.u, actual.u);
 #endif
     }
 
     return flag;
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 int8_t verify_results_f64(float64_t * ref, float64_t * opt, int length)
 {
 
@@ -293,6 +302,7 @@ int8_t verify_results_f64(float64_t * ref, float64_t * opt, int length)
 
     return flag;
 }
+#endif
 
 int8_t verify_results_u8(uint8_t * ref, uint8_t * opt, int length)
 {
@@ -394,7 +404,7 @@ void generate_rand_f32(float32_t *src, int length)
 {
     do_srand();
     for (int i = 0; i < length; i++) {
-        src[i] = (float32_t)((rand() % Q31_MAX - Q31_MAX / 2) * 1.0 / Q31_MAX);
+        src[i] = (float32_t)((rand() % Q31_MAX - Q31_MAX / 2) * 1.0f / (float32_t)Q31_MAX);
     }
 }
 
@@ -429,7 +439,7 @@ void generate_rand_f16(float16_t *src, int length)
 {
     do_srand();
     for (int i = 0; i < length; i++) {
-        src[i] = (float16_t)((rand() % Q15_MAX - Q15_MAX / 2) * 1.0 / Q15_MAX);
+        src[i] = (float16_t)((rand() % Q15_MAX - Q15_MAX / 2) * 1.0f / (float32_t)Q15_MAX);
     }
 }
 

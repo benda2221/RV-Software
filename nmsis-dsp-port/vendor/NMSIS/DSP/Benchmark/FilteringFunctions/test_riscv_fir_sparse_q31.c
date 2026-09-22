@@ -38,10 +38,6 @@ void firSparse_riscv_fir_sparse_q31(void)
     riscv_fir_sparse_q31(&S, testInput_q31_50Hz_200Hz, fir_sparse_q31_output, pTapDelayScratch_q31, TEST_LENGTH_SAMPLES_Q31);
     BENCH_END(riscv_fir_sparse_q31);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, fir_sparse_q31_output, (uint32_t)sizeof(fir_sparse_q31_output));
     printf("@@RESULT@@ case=firSparse_riscv_fir_sparse_q31 hash=0x%08x\n", (unsigned int)__zr_hash);

@@ -41,8 +41,6 @@ void bilinear_riscv_bilinear_interp_f32(void)
     bilinear_interp_f32_output = riscv_bilinear_interp_f32(&S_f32, x_f32_input, y_f32_input);
     BENCH_END(riscv_bilinear_interp_f32);
 
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &bilinear_interp_f32_output, (uint32_t)sizeof(bilinear_interp_f32_output));
     printf("@@RESULT@@ case=bilinear_riscv_bilinear_interp_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

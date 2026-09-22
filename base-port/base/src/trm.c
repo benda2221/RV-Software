@@ -21,7 +21,7 @@ void putch(char ch) {
     outb(SERIAL_PORT, ch);
 }
 void halt(int code) {
-  asm volatile(".word 0x80000000" : :"r"(code));
+  asm volatile(".word 0x80000000" : : "r"(code));
   while(1);
 }
 

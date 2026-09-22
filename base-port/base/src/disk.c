@@ -8,7 +8,15 @@ uint64_t ramdisk_read(void *buf, uint64_t offset, uint64_t len) {
   diskctl[0] = (uint32_t)offset;
   diskctl[1] = (uint32_t)buf;
   diskctl[2] = (uint32_t)len;
-  asm volatile("fence iorw, iorw");
+  asm volatile(
+      "feq.s zero, ft0, ft0\n\t"
+      "nop\n\t"
+      "nop\n\t"
+      "nop\n\t"
+      "nop\n\t"
+      "nop\n\t"
+      "nop\n\t"
+      "fence iorw, iorw");
   diskctl[3] = 1;
 
   return len;
@@ -21,7 +29,15 @@ uint64_t ramdisk_write(const void *buf, uint64_t offset, uint64_t len) {
   diskctl[0] = (uint32_t)offset;
   diskctl[1] = (uint32_t)buf;
   diskctl[2] = (uint32_t)len;
-  asm volatile("fence.i");
+  asm volatile(
+      "feq.s zero, ft0, ft0\n\t"
+      "nop\n\t"
+      "nop\n\t"
+      "nop\n\t"
+      "nop\n\t"
+      "nop\n\t"
+      "nop\n\t"
+      "fence.i");
   diskctl[3] = 2;
   
   return len;

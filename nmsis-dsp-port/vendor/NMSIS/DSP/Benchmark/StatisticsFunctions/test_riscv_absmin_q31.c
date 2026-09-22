@@ -30,9 +30,6 @@ void absmin_riscv_absmin_q31(void)
     riscv_absmin_q31(absmin_q31_input, ARRAY_SIZE, &q31_output, &index);
     BENCH_END(riscv_absmin_q31);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &q31_output, (uint32_t)sizeof(q31_output));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &index, (uint32_t)sizeof(index));

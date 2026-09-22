@@ -29,9 +29,6 @@ void power_riscv_power_q7(void)
     riscv_power_q7(power_q7_input, ARRAY_SIZE, &q31_output);
     BENCH_END(riscv_power_q7);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &q31_output, (uint32_t)sizeof(q31_output));
     printf("@@RESULT@@ case=power_riscv_power_q7 hash=0x%08x\n", (unsigned int)__zr_hash);

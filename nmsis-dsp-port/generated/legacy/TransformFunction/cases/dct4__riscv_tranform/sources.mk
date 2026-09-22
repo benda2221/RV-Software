@@ -2,7 +2,6 @@ TEST_NAME := nmsis-dsp-legacy-transformfunction-dct4__riscv_tranform
 TEST_SRCS := \
   vendor/NMSIS/DSP/Test/TransformFunction/dct4/riscv_tranform.c \
   vendor/NMSIS/DSP/Test/TransformFunction/dct4/dct4.c \
-  vendor/NMSIS/DSP/Test/HelperFunctions/ref_helper.c \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_cfft_radix4_init_f32.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_common_tables.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_const_structs.c \
@@ -15,7 +14,6 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q31_to_float.c \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_rfft_init_f32.c \
   vendor/NMSIS/DSP/Source/BasicMathFunctions/riscv_shift_q15.c \
-  vendor/NMSIS/DSP/Test/HelperFunctions/math_helper.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q15_to_float.c \
   vendor/NMSIS/DSP/Source/ComplexMathFunctions/riscv_cmplx_mult_cmplx_f32.c \
   vendor/NMSIS/DSP/Source/BasicMathFunctions/riscv_mult_f32.c \

@@ -40,10 +40,6 @@ void lms_riscv_lms_q31(void)
     riscv_lms_q31(&S, testInput_q31_50Hz_200Hz, expectoutput_q31_50Hz_200Hz, lms_q31_output, error_ones_q31, TEST_LENGTH_SAMPLES);
     BENCH_END(riscv_lms_q31);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, error_ones_q31, (uint32_t)sizeof(error_ones_q31));
     __zr_hash = zircon_result_hash_combine(__zr_hash, lms_q31_output, (uint32_t)sizeof(lms_q31_output));

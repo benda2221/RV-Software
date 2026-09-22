@@ -39,13 +39,8 @@ void matMult_riscv_mat_mult_q15(void)
     riscv_status result = riscv_mat_mult_q15(&q15_A, &q15_B, &q15_des, q15_output_back);
     BENCH_END(riscv_mat_mult_q15);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, q15_output, (uint32_t)sizeof(q15_output));
-    __zr_hash = zircon_result_hash_combine(__zr_hash, q15_output_back, (uint32_t)sizeof(q15_output_back));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
     printf("@@RESULT@@ case=matMult_riscv_mat_mult_q15 hash=0x%08x\n", (unsigned int)__zr_hash);
 TEST_ASSERT_EQUAL(RISCV_MATH_SUCCESS, result);

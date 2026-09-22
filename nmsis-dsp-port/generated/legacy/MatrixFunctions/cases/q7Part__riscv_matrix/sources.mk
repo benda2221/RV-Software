@@ -1,7 +1,6 @@
 TEST_NAME := nmsis-dsp-legacy-matrixfunctions-q7part__riscv_matrix
 TEST_SRCS := \
   vendor/NMSIS/DSP/Test/MatrixFunctions/q7Part/riscv_matrix.c \
-  vendor/NMSIS/DSP/Test/HelperFunctions/ref_helper.c \
   vendor/NMSIS/DSP/Test/MatrixFunctions/q7Part/ref_riscv_matrix.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_init_q7.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_mult_q7.c \

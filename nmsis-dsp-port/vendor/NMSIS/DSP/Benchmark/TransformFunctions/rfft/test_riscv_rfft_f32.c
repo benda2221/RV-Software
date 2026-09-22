@@ -43,9 +43,6 @@ BENCH_START(riscv_rfft_f32);
     riscv_rfft_f32(&SS, rfft_testinput_f32_50hz_200Hz, rfft_f32_output);
     BENCH_END(riscv_rfft_f32);
 
-    
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, rfft_f32_output, (uint32_t)sizeof(rfft_f32_output));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));

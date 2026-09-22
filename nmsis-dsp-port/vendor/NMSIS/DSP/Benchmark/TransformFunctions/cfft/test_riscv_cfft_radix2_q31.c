@@ -32,9 +32,6 @@ void cfft_riscv_cfft_radix2_q31(void)
     riscv_cfft_radix2_q31(&q31_S, cfft_testinput_q31_50hz_200Hz);
     BENCH_END(riscv_cfft_radix2_q31);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));
     printf("@@RESULT@@ case=cfft_riscv_cfft_radix2_q31 hash=0x%08x\n", (unsigned int)__zr_hash);

@@ -27,9 +27,6 @@ void hamming_distance_riscv_hamming_distance(void)
     hamming_distance_f32_output = riscv_hamming_distance(u32_hamming_a_array, u32_hamming_b_array, 36);
     BENCH_END(riscv_hamming_distance);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &hamming_distance_f32_output, (uint32_t)sizeof(hamming_distance_f32_output));
     printf("@@RESULT@@ case=hamming_distance_riscv_hamming_distance hash=0x%08x\n", (unsigned int)__zr_hash);

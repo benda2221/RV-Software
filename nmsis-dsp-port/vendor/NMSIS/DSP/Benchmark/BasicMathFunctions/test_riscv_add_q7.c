@@ -30,9 +30,6 @@ void add_riscv_add_q7(void)
     riscv_add_q7(add_q7_input1, add_q7_input2, add_q7_output, ARRAY_SIZE_Q7);
     BENCH_END(riscv_add_q7);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, add_q7_output, (uint32_t)sizeof(add_q7_output));
     printf("@@RESULT@@ case=add_riscv_add_q7 hash=0x%08x\n", (unsigned int)__zr_hash);

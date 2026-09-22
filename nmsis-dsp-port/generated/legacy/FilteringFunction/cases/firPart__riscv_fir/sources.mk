@@ -2,7 +2,6 @@ TEST_NAME := nmsis-dsp-legacy-filteringfunction-firpart__riscv_fir
 TEST_SRCS := \
   vendor/NMSIS/DSP/Test/FilteringFunction/firPart/riscv_fir.c \
   vendor/NMSIS/DSP/Test/FilteringFunction/firPart/fir.c \
-  vendor/NMSIS/DSP/Test/HelperFunctions/ref_helper.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_f16_to_float.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_f16.c \
   vendor/NMSIS/DSP/Source/FilteringFunctions/riscv_fir_f32.c \
@@ -23,7 +22,6 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q15_to_float.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q31_to_float.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_q7_to_float.c \
-  vendor/NMSIS/DSP/Test/HelperFunctions/math_helper.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_copy_f16.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_copy_f32.c \
   vendor/NMSIS/DSP/Source/SupportFunctions/riscv_copy_q15.c \

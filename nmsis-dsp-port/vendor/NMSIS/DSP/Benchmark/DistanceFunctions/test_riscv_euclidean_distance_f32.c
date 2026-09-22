@@ -37,9 +37,6 @@ void euclidean_distance_riscv_euclidean_distance_f32(void)
     euclidean_distance_f32_output = riscv_euclidean_distance_f32(euclidean_distance_f32_input1, euclidean_distance_f32_input2, ARRAY_SIZE_F32);
     BENCH_END(riscv_euclidean_distance_f32);
 
-    
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &euclidean_distance_f32_output, (uint32_t)sizeof(euclidean_distance_f32_output));
     printf("@@RESULT@@ case=euclidean_distance_riscv_euclidean_distance_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

@@ -390,8 +390,20 @@ __STATIC_FORCEINLINE q15_t riscv_pid_q15(
     acc += (q31_t) S->A2 * S->state[1];
 #endif
 
-    /* Don't remove this nop instruction, or it will cause an error */
-    asm volatile("nop");
+    /*
+     * Inline assembly bypasses the Dandelion packetizer, so keep this
+     * scheduling barrier as one complete VLIW packet.  Slot 0 uses the
+     * floating-point NOP and slots 1-7 use integer NOPs.
+     */
+    asm volatile(
+        "feq.s zero, ft0, ft0\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop");
 
     /* acc += y[n-1] */
     acc += (q31_t) S->state[2] << 15;

@@ -38,10 +38,6 @@ BENCH_START(riscv_vlog_f32);
     riscv_vlog_f32(vlog_f32_input, vlog_f32_output, ARRAY_SIZE_F32);
     BENCH_END(riscv_vlog_f32);
 
-    
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, vlog_f32_output, (uint32_t)sizeof(vlog_f32_output));
     printf("@@RESULT@@ case=vlog_riscv_vlog_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

@@ -31,11 +31,7 @@ void conv_riscv_conv_opt_q15(void)
                     conv_opt_q15_output, q15_pScratch1, q15_pScratch2);
     BENCH_END(riscv_conv_opt_q15);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, conv_opt_q15_output, (uint32_t)sizeof(conv_opt_q15_output));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, conv_opt_q15_output, (uint32_t)((ARRAYA_SIZE_Q15 + ARRAYB_SIZE_Q15 - 1u) * sizeof(conv_opt_q15_output[0])));
     printf("@@RESULT@@ case=conv_riscv_conv_opt_q15 hash=0x%08x\n", (unsigned int)__zr_hash);
 }

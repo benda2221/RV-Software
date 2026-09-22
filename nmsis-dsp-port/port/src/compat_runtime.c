@@ -74,10 +74,12 @@ float sqrtf(float value)
     return x;
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 double sqrt(double value)
 {
     return (double)sqrtf((float)value);
 }
+#endif
 
 float expf(float value)
 {
@@ -116,10 +118,12 @@ float expf(float value)
     return result;
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 double exp(double value)
 {
     return (double)expf((float)value);
 }
+#endif
 
 float tanhf(float value)
 {
@@ -133,10 +137,12 @@ float tanhf(float value)
     return (e2x - 1.0f) / (e2x + 1.0f);
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 double tanh(double value)
 {
     return (double)tanhf((float)value);
 }
+#endif
 
 float logf(float value)
 {
@@ -166,6 +172,12 @@ float logf(float value)
     return 2.0f * result + (float)scale * ln2;
 }
 
+float log10f(float value)
+{
+    return logf(value) * 0.4342944819032518f;
+}
+
+#if defined(ZIRCON_ENABLE_FLOAT64)
 double log(double value)
 {
     return (double)logf((float)value);
@@ -173,8 +185,9 @@ double log(double value)
 
 double log10(double value)
 {
-    return (double)(logf((float)value) * 0.4342944819032518f);
+    return (double)log10f((float)value);
 }
+#endif
 
 float powf(float base, float exponent)
 {
@@ -184,10 +197,12 @@ float powf(float base, float exponent)
     return expf(exponent * logf(base));
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 double pow(double base, double exponent)
 {
     return (double)powf((float)base, (float)exponent);
 }
+#endif
 
 float sinf(float value)
 {
@@ -208,10 +223,12 @@ float sinf(float value)
     return result;
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 double sin(double value)
 {
     return (double)sinf((float)value);
 }
+#endif
 
 float cosf(float value)
 {
@@ -232,10 +249,12 @@ float cosf(float value)
     return result;
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 double cos(double value)
 {
     return (double)cosf((float)value);
 }
+#endif
 
 float floorf(float value)
 {
@@ -246,10 +265,12 @@ float floorf(float value)
     return (float)truncated;
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 double floor(double value)
 {
     return (double)floorf((float)value);
 }
+#endif
 
 float ceilf(float value)
 {
@@ -260,10 +281,12 @@ float ceilf(float value)
     return (float)truncated;
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 double ceil(double value)
 {
     return (double)ceilf((float)value);
 }
+#endif
 
 float atan2f(float y, float x)
 {
@@ -288,7 +311,9 @@ float atan2f(float y, float x)
     return atan;
 }
 
+#if defined(ZIRCON_ENABLE_FLOAT64)
 double atan2(double y, double x)
 {
     return (double)atan2f((float)y, (float)x);
 }
+#endif

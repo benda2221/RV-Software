@@ -33,9 +33,6 @@ void rfft_riscv_rfft_q31(void)
     riscv_rfft_q31(&SS, rfft_testinput_q31_50hz_200Hz, rfft_q31_output);
     BENCH_END(riscv_rfft_q31);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, rfft_q31_output, (uint32_t)sizeof(rfft_q31_output));
     __zr_hash = zircon_result_hash_combine(__zr_hash, &result, (uint32_t)sizeof(result));

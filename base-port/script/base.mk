@@ -7,11 +7,12 @@ CC  = $(LLVM_BIN)/clang
 AS  = $(LLVM_BIN)/clang
 LLC = $(LLVM_BIN)/llc
 
-COMMON_FLAGS = -march=rv32imfd -mcpu=dandelion -O2 --target=riscv32-unknown-unknown -g
+COMMON_FLAGS = -march=rv32imf -mcpu=dandelion -O2 --target=riscv32-unknown-unknown -g
 
 CFLAGS = -MMD $(COMMON_FLAGS) $(INC_PATH)
-CFLAGS += -fno-asynchronous-unwind-tables -fno-builtin -fno-stack-protector 
+CFLAGS += -fno-asynchronous-unwind-tables -fno-builtin -fno-stack-protector -ffp-contract=off
 AFLAGS = $(COMMON_FLAGS)
+LLCFLAGS = --fp-contract=off -riscv-enable-pipeliner -riscv-disable-shallow-dependency=false
 ARFLAGS = rcs
 
 BUILD_DIR = $(abspath ./build)
@@ -34,17 +35,18 @@ $(IR_DIR)/%.ll: %.c
 # Step 2: Compile IR to assembly (.s)
 $(ASM_DIR)/%.s: $(IR_DIR)/%.ll
 	@mkdir -p $(dir $@) && printf "\033[33m[LLC]\033[0m $<\n"
-	@$(LLC) -mtriple=riscv32 -mcpu=dandelion -mattr=+m,+f,+d -filetype=asm -o $@ $<
+	@$(LLC) $(LLCFLAGS) -mtriple=riscv32 -mcpu=dandelion -mattr=+m,+f,-d,-unaligned-scalar-mem -filetype=asm -o $@ $<
+
+# Hand-written assembly (.S) bypasses the IR pipeline. Keep this rule before
+# the generated-assembly rule so a clean build does not try to derive start.ll.
+$(TAR_DIR)/%.o: %.S
+	@mkdir -p $(dir $@) && printf "\033[33m[AS]\033[0m $<\n"
+	@$(AS) $(AFLAGS) -c -o $@ $(realpath $<)
 
 # Step 3: Assemble .s to object file (.o)
 $(TAR_DIR)/%.o: $(ASM_DIR)/%.s
 	@mkdir -p $(dir $@) && printf "\033[33m[AS]\033[0m $<\n"
 	@$(AS) $(AFLAGS) -c -o $@ $<
-
-# Hand-written assembly (.S) bypasses IR pipeline
-$(TAR_DIR)/%.o: %.S
-	@mkdir -p $(dir $@) && printf "\033[33m[AS]\033[0m $<\n"
-	@$(AS) $(AFLAGS) -c -o $@ $(realpath $<)
 
 libkernel: $(LIBKER)
 $(LIBKER): $(OBJS)

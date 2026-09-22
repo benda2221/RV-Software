@@ -43,10 +43,6 @@ BENCH_START(riscv_fir_f32);
     riscv_fir_f32(&S, testInput_f32_50Hz_200Hz, fir_f32_output, TEST_LENGTH_SAMPLES);
     BENCH_END(riscv_fir_f32);
 
-    
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, fir_f32_output, (uint32_t)sizeof(fir_f32_output));
     printf("@@RESULT@@ case=fir_riscv_fir_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

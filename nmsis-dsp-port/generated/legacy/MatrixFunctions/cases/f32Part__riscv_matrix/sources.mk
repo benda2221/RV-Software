@@ -1,7 +1,6 @@
 TEST_NAME := nmsis-dsp-legacy-matrixfunctions-f32part__riscv_matrix
 TEST_SRCS := \
   vendor/NMSIS/DSP/Test/MatrixFunctions/f32Part/riscv_matrix.c \
-  vendor/NMSIS/DSP/Test/HelperFunctions/ref_helper.c \
   port/src/ref_matrix_f32_subset.c \
   vendor/NMSIS/DSP/Test/MatrixFunctions/f32Part/ref_riscv_matrix.c \
   vendor/NMSIS/DSP/Source/MatrixFunctions/riscv_mat_add_f32.c \

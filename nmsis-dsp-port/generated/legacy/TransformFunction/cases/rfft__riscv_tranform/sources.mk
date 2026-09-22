@@ -1,7 +1,6 @@
 TEST_NAME := nmsis-dsp-legacy-transformfunction-rfft__riscv_tranform
 TEST_SRCS := \
   vendor/NMSIS/DSP/Test/TransformFunction/rfft/riscv_tranform.c \
-  vendor/NMSIS/DSP/Test/HelperFunctions/ref_helper.c \
   vendor/NMSIS/DSP/Test/TransformFunction/rfft/rfft.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_common_tables.c \
   vendor/NMSIS/DSP/Source/CommonTables/riscv_const_structs.c \
@@ -18,7 +17,6 @@ TEST_SRCS := \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_rfft_init_q31.c \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_rfft_q15.c \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_rfft_q31.c \
-  vendor/NMSIS/DSP/Test/HelperFunctions/math_helper.c \
   vendor/NMSIS/DSP/Test/TransformFunction/cfft/cfft.c \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_bitreversal.c \
   vendor/NMSIS/DSP/Source/TransformFunctions/riscv_cfft_radix4_f32.c \

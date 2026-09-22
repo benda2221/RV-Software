@@ -176,7 +176,7 @@ int DSP_matrix_f32(void)
         }
     }
     for (int i = 0; i < M * N; i++) {
-        f32_f_array[i] = (float32_t)((rand() % Q31_MAX - Q31_MAX / 2) * 1.0 / Q31_MAX);
+        f32_f_array[i] = (float32_t)((rand() % Q31_MAX - Q31_MAX / 2) * 1.0f / (float32_t)Q31_MAX);
     }
     memset(f32_output_1, 0, sizeof(float32_t) * M * N);
     // ensure f32_output_ref_1[i] = f32_output_1[i], i = 0, 1, 2, ...

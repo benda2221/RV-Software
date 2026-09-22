@@ -29,9 +29,6 @@ void rms_riscv_rms_q15(void)
     riscv_rms_q15(rms_q15_input, ARRAY_SIZE, &q15_output);
     BENCH_END(riscv_rms_q15);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &q15_output, (uint32_t)sizeof(q15_output));
     printf("@@RESULT@@ case=rms_riscv_rms_q15 hash=0x%08x\n", (unsigned int)__zr_hash);

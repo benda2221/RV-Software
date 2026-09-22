@@ -29,9 +29,6 @@ void scale_riscv_scale_q15(void)
     riscv_scale_q15(scale_q15_input, scaleFract_q15, shift_q15, scale_q15_output, ARRAY_SIZE_Q15);
     BENCH_END(riscv_scale_q15);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, scale_q15_output, (uint32_t)sizeof(scale_q15_output));
     printf("@@RESULT@@ case=scale_riscv_scale_q15 hash=0x%08x\n", (unsigned int)__zr_hash);

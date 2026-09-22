@@ -29,9 +29,6 @@ void f32ToQ31_riscv_float_to_q31(void)
     riscv_float_to_q31(f32_input, q31_output, ARRAY_SIZE);
     BENCH_END(riscv_float_to_q31);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, q31_output, (uint32_t)sizeof(q31_output));
     printf("@@RESULT@@ case=f32ToQ31_riscv_float_to_q31 hash=0x%08x\n", (unsigned int)__zr_hash);

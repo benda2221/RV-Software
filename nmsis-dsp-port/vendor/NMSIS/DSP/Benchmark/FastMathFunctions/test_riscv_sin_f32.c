@@ -40,10 +40,6 @@ BENCH_START(riscv_sin_f32);
     }
     BENCH_END(riscv_sin_f32);
 
-    
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, sin_f32_output, (uint32_t)sizeof(sin_f32_output));
     printf("@@RESULT@@ case=sin_riscv_sin_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

@@ -27,9 +27,6 @@ void jaccard_distance_riscv_jaccard_distance(void)
     jaccard_distance_f32_output = riscv_jaccard_distance(u32_jaccard_a_array, u32_jaccard_b_array, 36);
     BENCH_END(riscv_jaccard_distance);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &jaccard_distance_f32_output, (uint32_t)sizeof(jaccard_distance_f32_output));
     printf("@@RESULT@@ case=jaccard_distance_riscv_jaccard_distance hash=0x%08x\n", (unsigned int)__zr_hash);

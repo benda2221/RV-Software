@@ -36,9 +36,6 @@ void braycurtis_distance_riscv_braycurtis_distance_f32(void)
     braycurtis_distance_f32_output = riscv_braycurtis_distance_f32(braycurtis_distance_f32_input1, braycurtis_distance_f32_input2, ARRAY_SIZE_F32);
     BENCH_END(riscv_braycurtis_distance_f32);
 
-    
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, &braycurtis_distance_f32_output, (uint32_t)sizeof(braycurtis_distance_f32_output));
     printf("@@RESULT@@ case=braycurtis_distance_riscv_braycurtis_distance_f32 hash=0x%08x\n", (unsigned int)__zr_hash);

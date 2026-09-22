@@ -31,12 +31,8 @@ void correlate_riscv_correlate_fast_q15(void)
                            ARRAYB_SIZE_Q15, correlate_q15_output);
     BENCH_END(riscv_correlate_fast_q15);
 
-
-
-
-
     uint32_t __zr_hash = 2166136261u;
-    __zr_hash = zircon_result_hash_combine(__zr_hash, correlate_q15_output, (uint32_t)sizeof(correlate_q15_output));
+    __zr_hash = zircon_result_hash_combine(__zr_hash, correlate_q15_output + ((ARRAYA_SIZE_Q15 >= ARRAYB_SIZE_Q15) ? (ARRAYA_SIZE_Q15 - ARRAYB_SIZE_Q15) : 0u), (uint32_t)((ARRAYA_SIZE_Q15 + ARRAYB_SIZE_Q15 - 1u) * sizeof(correlate_q15_output[0])));
     printf("@@RESULT@@ case=correlate_riscv_correlate_fast_q15 hash=0x%08x\n", (unsigned int)__zr_hash);
 return;
 }

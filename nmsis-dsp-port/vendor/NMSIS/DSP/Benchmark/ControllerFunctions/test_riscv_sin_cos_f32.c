@@ -45,9 +45,6 @@ BENCH_START(riscv_sin_cos_f32);
     }
     BENCH_END(riscv_sin_cos_f32);
 
-
-
-
     uint32_t __zr_hash = 2166136261u;
     __zr_hash = zircon_result_hash_combine(__zr_hash, pSinVal_f32, (uint32_t)sizeof(pSinVal_f32));
     __zr_hash = zircon_result_hash_combine(__zr_hash, pCosVal_f32, (uint32_t)sizeof(pCosVal_f32));

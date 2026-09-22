@@ -188,6 +188,8 @@ def strip_injected_result(text):
     i = 0
     while i < len(lines):
         if "uint32_t __zr_hash = 2166136261u;" in lines[i]:
+            while out and not out[-1].strip():
+                out.pop()
             j = i + 1
             while j < len(lines) and "__zr_hash = zircon_result_hash_combine(" in lines[j]:
                 j += 1
@@ -199,11 +201,55 @@ def strip_injected_result(text):
     return "".join(out)
 
 
-def hash_length_expr(function, item):
+def hash_region(function, item):
     name = item["name"]
+
+    # Partial convolution only defines numPoints samples starting at
+    # firstIndex.  The surrounding destination storage is not an output of
+    # the operation and must not participate in the result hash.
+    if function.startswith("convPartial_"):
+        return (
+            f"{name} + firstIndex",
+            f"(uint32_t)(numPoints * sizeof({name}[0]))",
+        )
+
+    type_suffix = function.rsplit("_", 1)[-1].upper()
+
+    # A convolution produces srcALen + srcBLen - 1 samples.  Upstream
+    # benchmarks over-allocate the destination as 2 * max(srcALen, srcBLen).
+    if function.startswith("conv_"):
+        return (
+            name,
+            f"(uint32_t)((ARRAYA_SIZE_{type_suffix} + ARRAYB_SIZE_{type_suffix} - 1u) * sizeof({name}[0]))",
+        )
+
+    # Correlation writes srcALen + srcBLen - 1 non-padding samples into a
+    # conceptual 2 * max(srcALen, srcBLen) - 1 result.  When A is longer,
+    # the leading A-B padding is deliberately left untouched.
+    if function.startswith("correlate_"):
+        array_a = f"ARRAYA_SIZE_{type_suffix}"
+        array_b = f"ARRAYB_SIZE_{type_suffix}"
+        return (
+            f"{name} + (({array_a} >= {array_b}) ? ({array_a} - {array_b}) : 0u)",
+            f"(uint32_t)(({array_a} + {array_b} - 1u) * sizeof({name}[0]))",
+        )
+
+    # A decimator produces blockSize / M samples; the benchmark destination
+    # arrays are sized to blockSize and therefore contain an unwritten tail.
+    if function.startswith("firDecimate_") and "decimate" in name.lower():
+        return (
+            name,
+            f"(uint32_t)((TEST_LENGTH_SAMPLES / M) * sizeof({name}[0]))",
+        )
+
+    # In the RV32IMF scalar implementation pState is explicitly unused.  It
+    # is scratch storage rather than a matrix multiplication result.
+    if function == "matMult_riscv_mat_mult_q15" and name == "q15_output_back":
+        return None
+
     if "cmplx_mag" in function and re.search(r"\[\s*2\s*\*", item["decl"]):
-        return f"(uint32_t)(sizeof({name}) / 2u)"
-    return f"(uint32_t)sizeof({name})"
+        return name, f"(uint32_t)(sizeof({name}) / 2u)"
+    return name, f"(uint32_t)sizeof({name})"
 
 
 def instrument_file(path):
@@ -222,9 +268,12 @@ def instrument_file(path):
     _, arrays, scalars = collect_items(text)
     lines = ["", "    uint32_t __zr_hash = 2166136261u;"]
     for item in arrays:
-        name = item["name"]
+        region = hash_region(function, item)
+        if region is None:
+            continue
+        data_expr, length_expr = region
         lines.append(
-            f"    __zr_hash = zircon_result_hash_combine(__zr_hash, {name}, {hash_length_expr(function, item)});"
+            f"    __zr_hash = zircon_result_hash_combine(__zr_hash, {data_expr}, {length_expr});"
         )
     for name in scalars:
         lines.append(
